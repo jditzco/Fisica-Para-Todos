@@ -1,0 +1,4 @@
+class Tema {
+    idTemas;
+    temas;
+}
