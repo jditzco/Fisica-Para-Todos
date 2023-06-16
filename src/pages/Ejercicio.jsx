@@ -88,7 +88,7 @@ const Test = () => {
                     <Modal.Header>
                         <Modal.Title>Resultado</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body> <h2>Te sacaste un {porcentaje} /100</h2>
+                    <Modal.Body> <h2>Te sacaste un {porcentaje}/100</h2>
                     
                     <Button variant="primary"><Link to={'/'} className='link'>Finalizar ejercicio</Link></Button>
                     </Modal.Body>
