@@ -29,3 +29,5 @@ const simuladores = [
         descripcion:'ete sech asheeee',
     }
 ]
+
+export default simuladores

@@ -8,8 +8,7 @@ import { Link } from 'react-router-dom';
 function NavBar() {
   return (
     <Navbar bg="light" expand="sm" className='navbar-container'>
-        <Link to={'/'}><img src='/img/logo.png' className='logo'/></Link>
-        <Link to={'/seleccion'}><img src='/img/logo.png' className='logo'/>Seleccion</Link>
+        <Link to={'/seleccion'}><img src='/img/logo.png' className='logo'/></Link>
     </Navbar>
   )
 }
