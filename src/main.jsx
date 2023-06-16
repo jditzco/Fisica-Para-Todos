@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import Ejercicio from './pages/Ejercicio.jsx'
+import Seleccion from './pages/Seleccion.jsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 const routes = createBrowserRouter([{
@@ -12,6 +13,9 @@ const routes = createBrowserRouter([{
 },{
   path: '/ejercicio',
   element: <Ejercicio />,
+},{
+  path: '/seleccion',
+  element: <Seleccion/>
 }])
 
 createRoot(document.getElementById('root')).render(

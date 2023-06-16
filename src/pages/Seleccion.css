@@ -1,0 +1,14 @@
+.button{
+    width: 50%;
+    margin: 10px;
+    font-size: 75px;
+}
+
+.button-container{
+    display: flex;
+    margin-top: 30vh;
+    gap: 10px;
+    padding: 10px;
+    flex-direction: row;
+    max-height: 70vh;
+}
