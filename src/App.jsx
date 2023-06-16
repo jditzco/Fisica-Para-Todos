@@ -2,19 +2,45 @@ import { Container, Row, Col, Form, InputGroup, Button, ButtonGroup } from 'reac
 import './App.css'
 import NavBar from './components/NavBar'
 import Ejercicio from './components/Ejercicio'
+import { useEffect, useRef, useState } from 'react'
+import data from './data/data'
 
 const App = () => {
-    console.log("app")
-    const variable1 = "jero"
+    const listaEjercicios = data
+
+    const [ejercicios, setEjercicios] = useState([]) 
+    const [busqueda, setBusqueda] = useState('')
+    const [dificultad, setDificultad] = useState(0)
+    const buscarInput = useRef()
+
+    useEffect(() => setEjercicios(listaEjercicios), [])
+
+    useEffect(() => {
+        var lista = [...listaEjercicios]
+        if (dificultad) lista = lista.filter(ej => ej.dificultad === dificultad)
+        if (busqueda) {
+            lista = lista.filter((ej) => (
+                ej.titulo.toUpperCase().includes(buscarInput.current.value.toUpperCase())
+            ))
+        }
+        setEjercicios(lista)
+    }, [busqueda, dificultad])
+
+    const handleClick = e => setDificultad(Number(e.target.value))
+    const handleChange = e => setBusqueda(e.target.value)
+
     return (
         <>
             <NavBar />
-            <Container className='app-container'>
+            <Container fluid className='app-container'>
                 <Row>
                     <Col sm={3}></Col>
                     <Col sm={9}>
                         <InputGroup className="mb-3">
-                            <Form.Control placeholder="Buscar..." />
+                            <Form.Control placeholder="Buscar..."
+                                value={busqueda}
+                                onChange={handleChange}
+                                ref={buscarInput} />
                             <Button variant="secondary"><i className="bi bi-search"></i></Button>
                         </InputGroup>
                     </Col>
@@ -22,18 +48,17 @@ const App = () => {
                 <Row>
                     <Col sm={3} className='dificultades-container'>
                         <h4>Dificultades</h4>
-                        <div>
-                            <ButtonGroup aria-label="Basic example">
-                              <Button variant="success">Left</Button>
-                              <Button variant="warning">Middle</Button>
-                              <Button variant="danger">Right</Button>
-                            </ButtonGroup>
-                        </div>
+                        <Button variant="primary" value={0} onClick={handleClick} className='dificulty-button'>Reset</Button>
+                        <ButtonGroup aria-label="Basic example" className='dificulty-button'>
+                            <Button variant="success" value={1} onClick={handleClick}>Principiante</Button>
+                            <Button variant="warning" value={2} onClick={handleClick}>Intermedio</Button>
+                            <Button variant="danger" value={3} onClick={handleClick}>Avanzado</Button>
+                        </ButtonGroup>
                     </Col>
                     <Col sm={9} className='ejercicios-container'>
-                        <Ejercicio titulo="Ejercicio1" descripcion={"Ehjerciccio xd"} dificultad={"dificldificl"} />
-                        <Ejercicio titulo="Ejercicio 2" descripcion={"ejercicio insano"} dificultad={"bien dificil"} />
-                        <Ejercicio titulo="Ejercicio 3" descripcion={"fisica en segunods"} dificultad={"facil"} />
+                        {ejercicios.map((ej, key) => (
+                            <Ejercicio key={key} titulo={ej.titulo} descripcion={ej.descripcion} dificultad={ej.dificultad} />
+                        ))}
                     </Col>
                 </Row>
             </Container>
