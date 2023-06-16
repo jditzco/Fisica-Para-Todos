@@ -6,6 +6,7 @@ import './index.css'
 import Ejercicio from './pages/Ejercicio.jsx'
 import Seleccion from './pages/Seleccion.jsx'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import Simuladores from './pages/Simuladores.jsx'
 
 const routes = createBrowserRouter([{
   path: '/',
@@ -16,6 +17,9 @@ const routes = createBrowserRouter([{
 },{
   path: '/seleccion',
   element: <Seleccion/>
+},{
+  path: '/simuladores',
+  element: <Simuladores/>
 }])
 
 createRoot(document.getElementById('root')).render(

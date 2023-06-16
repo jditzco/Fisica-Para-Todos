@@ -7,8 +7,8 @@ const Seleccion = () => {
         <>
         <NavBar/>
         <Container className='button-container'>
-        <Link to={'/'} className='button'><Button variant="info" className='button'><i class="bi bi-mortarboard-fill"></i><p>Simuladores</p></Button>{' '}</Link>
-        <Link to={'/'} className='button'><Button variant="info" className='button'><i class="bi bi-mortarboard-fill"></i><p>Ejercicios</p></Button>{' '}</Link>
+        <Link to={'/simuladores'} ><Button variant="info" className='button'><i class="bi bi-mortarboard-fill"></i><p>Simuladores</p></Button>{' '}</Link>
+        <Link to={'/'} ><Button variant="info" className='button'><i class="bi bi-mortarboard-fill"></i><p>Ejercicios</p></Button>{' '}</Link>
         </Container>
         </>
     )
