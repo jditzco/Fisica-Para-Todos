@@ -1,9 +1,13 @@
 .button{
+    display: inline-block;
     width: 50%;
     margin: 10px;
     font-size: 75px;
-}
 
+}
+i{
+    flex: 2;
+}
 .button-container{
     display: flex;
     margin-top: 30vh;
@@ -11,4 +15,14 @@
     padding: 10px;
     flex-direction: row;
     max-height: 70vh;
+}
+
+@media (max-width: 990px) {
+    .button{
+        display: inline-block;
+        width: 50%;
+        margin: 10px;
+        font-size: 50px;
+    
+    }
 }

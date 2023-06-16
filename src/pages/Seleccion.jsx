@@ -1,4 +1,5 @@
-import { Button, Container, Form, Modal } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import './Seleccion.css'
 import NavBar from '../components/NavBar'
 const Seleccion = () => {
@@ -6,8 +7,8 @@ const Seleccion = () => {
         <>
         <NavBar/>
         <Container className='button-container'>
-        <Button variant="info" className='button class="bi bi-mortarboard-fill"'>Simuladores</Button>{' '}
-        <Button variant="info" className='button'>Ejercicios</Button>{' '}
+        <Link to={'/'} className='button'><Button variant="info" className='button'><i class="bi bi-mortarboard-fill"></i><p>Simuladores</p></Button>{' '}</Link>
+        <Link to={'/'} className='button'><Button variant="info" className='button'><i class="bi bi-mortarboard-fill"></i><p>Ejercicios</p></Button>{' '}</Link>
         </Container>
         </>
     )
