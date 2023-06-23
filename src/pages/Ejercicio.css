@@ -3,15 +3,15 @@
     justify-content: center;
 }
 
-.pregunta-container{
-    /* margin-left: 2rem; */
+.button-submit{
+    margin: 30px;
+
 }
 
 .respuestas-container{
     padding: 15px;
     margin-left: 2rem; 
     display: flex;
-    /* height: 8rem; */
     border-radius: 10px;
     flex-direction: column;
     background-color: rgb(127, 182, 255);

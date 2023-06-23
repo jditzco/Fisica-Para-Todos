@@ -64,13 +64,13 @@ const Test = () => {
                     {preguntas?.map((ej, index) => (
                         <div key={index}>
                             <section className='consigna'>
-                                {/* <h6>Pregunta</h6> */}
+                                
                                 <div className='pregunta-container'>
                                     <h3>{ej.pregunta}</h3>
                                 </div>
                             </section>
                             <section className='opciones'>
-                                {/* <h6>Respuestas</h6> */}
+                                
                                 <div className='respuestas-container'>
                                     {
                                     
@@ -86,7 +86,7 @@ const Test = () => {
                             </section>
                         </div>
                     ))}
-                    <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
+                    <Button className='button-submit' variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
                 </Form>
 
                 <Modal show={show}>
@@ -94,7 +94,6 @@ const Test = () => {
                         <Modal.Title>Resultado</Modal.Title>
                     </Modal.Header>
                     <Modal.Body> <h2>Te sacaste un {porcentaje}/100</h2>
-                    
                     <Button variant="primary"><Link to={'/'} className='link'>Finalizar ejercicio</Link></Button>
                     </Modal.Body>
                     
