@@ -56,9 +56,10 @@ const Test = () => {
     }
     return (
         <>
+        
             <NavBar />
             <Container className='ejercicio-container'>
-                <h1>Nombre Tema</h1>
+                <h1>Suerte!</h1>
                 <Form className='form-respuestas-container'>
                     {preguntas?.map((ej, index) => (
                         <div key={index}>
@@ -72,9 +73,13 @@ const Test = () => {
                                 {/* <h6>Respuestas</h6> */}
                                 <div className='respuestas-container'>
                                     {
+                                    
                                         ej.respuestas.map((respuesta, index) => (
-                                            <Form.Check key={index} label={respuesta.respuesta} value={respuesta.id} name={`pregunta-${ej.id}`} type={"radio"}
-                                                onClick={handleChange} />
+                                            <label className='checks '>
+                                                <Form.Check className='checks' key={index} label={respuesta.respuesta} value={respuesta.id} name={`pregunta-${ej.id}`} type={ej.tipo}
+                                            onClick={handleChange} /> 
+                                            </label>
+                                              
                                         ))
                                     }
                                 </div>

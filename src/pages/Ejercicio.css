@@ -8,7 +8,26 @@
 }
 
 .respuestas-container{
-    /* margin-left: 2rem; */
+    padding: 15px;
+    margin-left: 2rem; 
     display: flex;
+    /* height: 8rem; */
+    border-radius: 10px;
     flex-direction: column;
+    background-color: rgb(127, 182, 255);
+    transition: all .3s ease;
+}
+.respuestas-container:hover{
+    padding-right: 30px;
+    padding-left: 30px;
+    transform: scale(1.05);
+}
+label > .form-check{
+    transition: all .3s ease;
+}
+label > .form-check:hover{
+    transform: scale(1.023);
+    border-radius: 5px;
+    background-color: rgba(84, 148, 221, .5);
+    padding-left: 50px;
 }
