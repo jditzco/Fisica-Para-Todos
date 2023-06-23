@@ -1,11 +1,11 @@
 import { Container, Row, Col, Form, InputGroup, Button, ButtonGroup } from 'react-bootstrap'
-import './App.css'
-import NavBar from './components/NavBar'
-import Ejercicio from './components/Ejercicio'
+import './ListadoEjercicios.css'
+import NavBar from '../components/NavBar'
+import Ejercicio from '../components/Ejercicio'
 import { useEffect, useRef, useState } from 'react'
-import data from './data/data'
+import data from '../data/data'
 
-const App = () => {
+const ListadoEjercicios = () => {
     const listaEjercicios = data
 
     const [ejercicios, setEjercicios] = useState([]) 
@@ -66,4 +66,4 @@ const App = () => {
     )
 }
 
-export default App
+export default ListadoEjercicios

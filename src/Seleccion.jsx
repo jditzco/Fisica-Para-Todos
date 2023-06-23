@@ -1,7 +1,7 @@
 import { Button, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import './Seleccion.css'
-import NavBar from '../components/NavBar'
+import NavBar from './components/NavBar';
 import { useRef } from 'react';
 const Seleccion = () => {
     const linkSimuladores = useRef()

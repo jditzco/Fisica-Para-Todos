@@ -1,22 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import ListadoEjercicios from './pages/ListadoEjercicios'
 import './index.css'
 import Ejercicio from './pages/Ejercicio.jsx'
-import Seleccion from './pages/Seleccion.jsx'
+import Seleccion from './Seleccion'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Simuladores from './pages/Simuladores.jsx'
 
 const routes = createBrowserRouter([{
+  path: '/seleccion',
+  element: <Seleccion/>
+},{
   path: '/',
-  element: <App />,
+  element: <ListadoEjercicios/>,
 },{
   path: '/ejercicio',
   element: <Ejercicio />,
-},{
-  path: '/seleccion',
-  element: <Seleccion/>
 },{
   path: '/simuladores',
   element: <Simuladores/>
