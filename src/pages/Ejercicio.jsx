@@ -75,8 +75,8 @@ const Test = () => {
                                     {
                                     
                                         ej.respuestas.map((respuesta, index) => (
-                                            <label className='checks '>
-                                                <Form.Check className='checks' key={index} label={respuesta.respuesta} value={respuesta.id} name={`pregunta-${ej.id}`} type={ej.tipo}
+                                            <label className='checks' key={index}>
+                                                <Form.Check className='checks prevent-select' label={respuesta.respuesta} value={respuesta.id} name={`pregunta-${ej.id}`} type={ej.tipo}
                                             onClick={handleChange} /> 
                                             </label>
                                               

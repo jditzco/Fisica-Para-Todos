@@ -9,10 +9,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Simuladores from './pages/Simuladores.jsx'
 
 const routes = createBrowserRouter([{
-  path: '/seleccion',
+  path: '/',
   element: <Seleccion/>
 },{
-  path: '/',
+  path: '/listadoEjercicios',
   element: <ListadoEjercicios/>,
 },{
   path: '/ejercicio',

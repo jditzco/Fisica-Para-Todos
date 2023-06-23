@@ -10,7 +10,7 @@
 
 .respuestas-container{
     padding: 15px;
-    margin-left: 2rem; 
+    margin-left: 2rem;
     display: flex;
     border-radius: 10px;
     flex-direction: column;
@@ -23,7 +23,7 @@
     transform: scale(1.05);
 }
 label > .form-check{
-    transition: all .3s ease;
+    transition: all .15s ease;
 }
 label > .form-check:hover{
     transform: scale(1.023);

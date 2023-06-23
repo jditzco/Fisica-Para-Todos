@@ -16,7 +16,7 @@ const Seleccion = () => {
     return (
         <>
         <Link to={'/simuladores'} ref={linkSimuladores}></Link>
-        <Link to={'/'} ref={linkHome}></Link>
+        <Link to={'/listadoEjercicios'} ref={linkHome}></Link>
         <NavBar/>
         <Container className='button-container'>
         <Button variant="info" className='button' onClick={(e) => handleClick(e, 'simuladores')}><i className="bi bi-mortarboard-fill"></i><p>Simuladores</p></Button>{' '}
