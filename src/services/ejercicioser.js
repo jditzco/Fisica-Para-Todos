@@ -1,8 +1,8 @@
-import config from "../dbconfig";
+import config from "../dbconfig.js";
 import sql from "mssql";
 
-class ejercicioser {
-    getEjercicio = async () =>{
+class EjercicioService {
+    getEjercicios = async () =>{
         let returnArray = null;
         try {
             let pool = await sql.connect(config);
@@ -32,4 +32,4 @@ class ejercicioser {
     }
 
 }
-export default ejercicioser
+export default EjercicioService

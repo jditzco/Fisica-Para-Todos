@@ -1,7 +1,7 @@
-import config from "../dbconfig";
+import config from "../dbconfig.js";
 import sql from "mssql";
 
-class respuestaser {
+class RespuestaService {
     
     getRespuestas = async (idPreguntas) =>{
         let returnEntity = null;
@@ -19,4 +19,4 @@ class respuestaser {
     }
 
 }
-export default respuestaser
+export default RespuestaService
