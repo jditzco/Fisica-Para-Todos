@@ -8,7 +8,7 @@ class RespuestaService {
         try {
             let pool = await sql.connect(config);
             let result =await pool.request()
-                                .input('idPreguntas', sql.int, idPreguntas)
+                                .input('idPreguntas', sql.Int, idPreguntas)
                                 .query('SELECT * FROM Respuestas WHERE idPreguntas = @idPreguntas')
             returnEntity = result.recordsets[0];
         }

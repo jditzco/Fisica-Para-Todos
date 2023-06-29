@@ -8,13 +8,14 @@ class PreguntaService {
         try {
             let pool = await sql.connect(config);
             let result =await pool.request()
-                                .input('idTemas', sql.int, idTemas)
+                                .input('idTemas', sql.Int, idTemas)
                                 .query('SELECT * FROM Preguntas WHERE IdTemas = @idTemas')
             returnEntity = result.recordsets[0];
         }
         catch (error){
             console.log(error)
         }
+
         return returnEntity;
     }
 

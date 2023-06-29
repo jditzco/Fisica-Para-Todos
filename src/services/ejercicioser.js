@@ -15,21 +15,5 @@ class EjercicioService {
         }
         return returnArray;
     }
-    
-    getTemaByid = async (idTemas) =>{
-        let returnEntity = null;
-        try {
-            let pool = await sql.connect(config);
-            let result =await pool.request()
-                                .input('idTemas', sql.int, idTemas)
-                                .query('SELECT * FROM Temas WHERE IdTemas = @idTemas')
-            returnEntity = result;
-        }
-        catch (error){
-            console.log(error)
-        }
-        return returnEntity;
-    }
-
 }
 export default EjercicioService
