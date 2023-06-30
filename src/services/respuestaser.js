@@ -3,13 +3,13 @@ import sql from "mssql";
 
 class RespuestaService {
     
-    getRespuestas = async (idPreguntas) =>{
+    getRespuestas = async (idPregunta) =>{
         let returnEntity = null;
         try {
             let pool = await sql.connect(config);
             let result =await pool.request()
-                                .input('idPreguntas', sql.Int, idPreguntas)
-                                .query('SELECT * FROM Respuestas WHERE idPreguntas = @idPreguntas')
+                                .input('idPregunta', sql.Int, idPregunta)
+                                .query('SELECT * FROM Respuestas WHERE idPregunta = @idPregunta')
             returnEntity = result.recordsets[0];
         }
         catch (error){

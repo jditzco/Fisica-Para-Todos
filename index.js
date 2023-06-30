@@ -12,7 +12,6 @@ const resser = new RespuestaService();
 
 app.get('/ejercicios', async (req, res) => {
   let data = await ejser.getEjercicios();
-  console.log("asdasd");
   res.json(data);
 });
 

@@ -1,7 +1,8 @@
-class respuesta{
-    idRespuestas;
-    idPreguntas;
-    descrip;
+class respuestas{
+    id;
+    idPregunta;
+    respuesta;
+    correcta;
 }
 
-export default respuesta
+export default respuestas

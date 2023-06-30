@@ -1,7 +1,7 @@
 class preguntas{
-    idPreguntas;
-    descrip;
-    idTemas;
+    id;
+    pregunta;
+    idEjercicios;
 }
 
 export default preguntas

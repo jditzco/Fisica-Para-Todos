@@ -1,6 +1,7 @@
 class ejercicios{
-    idEjercicios;
-    descrip;
+    id;
+    titulo;
+    descripcion;
     dificultad;
 }
 
