@@ -9,7 +9,7 @@ class RespuestaService {
             let pool = await sql.connect(config);
             let result =await pool.request()
                                 .input('idPregunta', sql.Int, idPregunta)
-                                .query('SELECT * FROM Respuestas WHERE idPregunta = @idPregunta')
+                                .query('SELECT * FROM Respuestas WHERE idPreguntas = @idPregunta')
             returnEntity = result.recordsets[0];
         }
         catch (error){
