@@ -1,5 +1,6 @@
 import express from 'express';
 import preguntas from './src/models/preguntas.js';
+import UsuarioService from './src/services/usuarioser.js';                       
 import SimuladorService from './src/services/simuladorser.js';
 import EjercicioService from './src/services/ejercicioser.js';
 import PreguntaService from './src/services/preguntaser.js';
@@ -7,6 +8,8 @@ import RespuestaService from './src/services/respuestaser.js';
 
 const app = express();
 const port = 5000;
+
+const usserr = new UsuarioService();
 const simuser = new SimuladorService();
 const ejser = new EjercicioService();
 const pregser = new PreguntaService();
@@ -19,6 +22,16 @@ app.get('/ejercicios', async (req, res) => {
 
 app.get('/simuladores', async (req, res) => {
   let data = await simuser.getSimuladores();
+  res.json(data);
+});
+
+app.get('/usuarios/:idUsuario', async (req, res) => {
+  let objectId = req.params.idUsuario;
+  let data = await usserr.getUsuario(objectId);
+  console.log(data)
+  if (!data) {
+    res.status(404).json({ error: 'Objeto no encontrado' });
+  }
   res.json(data);
 });
 
