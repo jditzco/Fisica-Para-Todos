@@ -4,17 +4,26 @@ import NavBar from '../components/NavBar'
 import Ejercicio from '../components/Ejercicio'
 import { useEffect, useRef, useState } from 'react'
 import data from '../data/data'
+import axios from 'axios'
 
 const ListadoEjercicios = () => {
-    const listaEjercicios = data
-
+    const [listaEjercicios, setListaEjercicios] = useState([])
     const [ejercicios, setEjercicios] = useState([]) 
     const [busqueda, setBusqueda] = useState('')
     const [dificultad, setDificultad] = useState(0)
     const buscarInput = useRef()
 
-    useEffect(() => setEjercicios(listaEjercicios), [])
-
+    useEffect(() => {
+        axios.get('http://localhost:5000/ejercicios')
+          .then(response => {
+            setListaEjercicios(response.data);
+            setEjercicios(response.data)
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }, []);
     useEffect(() => {
         var lista = [...listaEjercicios]
         if (dificultad) lista = lista.filter(ej => ej.dificultad === dificultad)
@@ -57,7 +66,7 @@ const ListadoEjercicios = () => {
                     </Col>
                     <Col sm={9} className='ejercicios-container'>
                         {ejercicios.map((ej, key) => (
-                            <Ejercicio key={key} titulo={ej.titulo} descripcion={ej.descripcion} dificultad={ej.dificultad} />
+                            <Ejercicio key={key} idEj={ej.id} titulo={ej.titulo} descripcion={ej.descripcion} dificultad={ej.dificultad} />
                         ))}
                     </Col>
                 </Row>
