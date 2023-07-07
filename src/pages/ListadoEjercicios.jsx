@@ -19,7 +19,7 @@ const ListadoEjercicios = () => {
     const buscarInput = useRef()
 
     useEffect(() => async() => {
-        const response = await axios.get('http://localhost:5000/ejercicios')
+        const response = await fetch('http://localhost:5000/ejercicios')
         const data = await response.json()
         setListaEjercicios(data)
         setEjerciciosActivos(data)
