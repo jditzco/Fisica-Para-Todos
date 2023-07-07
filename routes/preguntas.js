@@ -1,6 +1,8 @@
 import express from 'express';
 import PreguntaService from '../src/services/preguntaser.js';
+import RespuestaService from '../src/services/respuestaser.js';
 
+const resser = new RespuestaService();
 const pregser = new PreguntaService();
 
 
@@ -15,11 +17,16 @@ router.get('/', async (req, res) => {
 router.get('/:idpreguntas', async (req, res) => {
     let objectId = req.params.idpreguntas;
     let data = await pregser.getPreguntaByIdEjercicio(objectId);
-    console.log(data)
-    if (!data) {
+    const returnVar = await Promise.all(data.map(async (preguntas) => {
+        const { id, pregunta, tipo } = preguntas;
+        let respuestas = await resser.getRespuestasByIdPregunta(id);
+        return { id, pregunta, tipo, respuestas };
+      }));
+    console.log(returnVar)
+    if (!returnVar) {
       res.status(404).json({ error: 'Objeto no encontrado' });
     }
-    res.json(data);
+    res.json(returnVar);
 });
 
 export default router;
