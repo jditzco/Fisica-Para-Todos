@@ -7,24 +7,26 @@ import data from '../data/data'
 import axios from 'axios'
 
 const ListadoEjercicios = () => {
+
+    // Lista de ejercicios
     const [listaEjercicios, setListaEjercicios] = useState([])
-    const [ejercicios, setEjercicios] = useState([]) 
-    const [busqueda, setBusqueda] = useState('')
+
+    // Los ejercicios de la lista que se están mostrando en pantalla
+    const [ejerciciosActivos, setEjerciciosActivos] = useState([])
+    // Filtros
     const [dificultad, setDificultad] = useState(0)
+    const [busqueda, setBusqueda] = useState('')
+
     const buscarInput = useRef()
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/ejercicios')
-          .then(response => {
-            setListaEjercicios(response.data);
-            setEjercicios(response.data)
-            console.log(response.data)
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }, []);
-    useEffect(() => {
+    useEffect(() => async() => {
+        const response = await axios.get('http://localhost:5000/ejercicios')
+        const data = await response.json()
+        setListaEjercicios(data)
+        setEjerciciosActivos(data)
+    }, [])
+
+    useEffect(() => { // Filtrar
         var lista = [...listaEjercicios]
         if (dificultad) lista = lista.filter(ej => ej.dificultad === dificultad)
         if (busqueda) {
@@ -32,7 +34,7 @@ const ListadoEjercicios = () => {
                 ej.titulo.toUpperCase().includes(buscarInput.current.value.toUpperCase())
             ))
         }
-        setEjercicios(lista)
+        setEjerciciosActivos(lista)
     }, [busqueda, dificultad])
 
     const handleClick = e => setDificultad(Number(e.target.value))
@@ -65,7 +67,7 @@ const ListadoEjercicios = () => {
                         </ButtonGroup>
                     </Col>
                     <Col sm={9} className='ejercicios-container'>
-                        {ejercicios.map((ej, key) => (
+                        {ejerciciosActivos.map((ej, key) => (
                             <Ejercicio key={key} idEj={ej.id} titulo={ej.titulo} descripcion={ej.descripcion} dificultad={ej.dificultad} />
                         ))}
                     </Col>
