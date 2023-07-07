@@ -9,10 +9,16 @@ import preguntasData from '../data/ejercicio'
  * 
  */
 const Test = () => {
-    const preguntas = preguntasData
+    const [preguntas, setPreguntas] = useState([])
     const [respuestas, setRespuestas] = useState([])
     const [porcentaje, setPorcentaje] = useState(0)
     const [show, setShow] = useState(false);
+
+    useEffect(() => async() => {
+        const response = await axios.get('http://localhost:5000/ejercicios')
+        const data = await response.json()
+        setPreguntas(data)
+    }, [])
 
     useEffect(() => {
         let respuestas = []
