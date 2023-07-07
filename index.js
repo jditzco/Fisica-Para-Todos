@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import preguntas from './src/models/preguntas.js';
 import UsuarioService from './src/services/usuarioser.js';                       
 import SimuladorService from './src/services/simuladorser.js';
@@ -14,6 +15,21 @@ const simuser = new SimuladorService();
 const ejser = new EjercicioService();
 const pregser = new PreguntaService();
 const resser = new RespuestaService();
+
+app.use(cors({ origin: 'http://localhost:3000' }));
+
+app.set("view engine", "ejs")
+
+app.get('/docs', (req, res) => {
+  res.render("docs")
+});
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 app.get('/ejercicios', async (req, res) => {
   let data = await ejser.getEjercicios();
@@ -54,6 +70,7 @@ app.get('/respuestas/:idpreguntas', async (req, res) => {
   }
   res.json(data);
 });
+
 
 app.listen(port, () => {
   console.log(`Servidor en funcionamiento en el puerto ${port}`);
