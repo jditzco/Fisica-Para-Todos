@@ -11,17 +11,18 @@ import preguntasData from '../data/ejercicio'
 
 const Test = () => {
 
-    const preguntas = preguntasData
+   // const preguntas = preguntasData
+    const [preguntas, setPreguntas] = useState([])
     const [respuestas, setRespuestas] = useState([])
     const [porcentaje, setPorcentaje] = useState(0)
     const [show, setShow] = useState(false);
 
-    /*useEffect(() => async() => {
-        const response = await fetch('http://localhost:5000/ejercicios')
+    useEffect(() => async() => {
+        const response = await fetch('http://localhost:5000/preguntas/1')
         const data = await response.json()
         setPreguntas(data)
     }, [])
-    */
+    
 
     useEffect(() => {
         let respuestas = []
