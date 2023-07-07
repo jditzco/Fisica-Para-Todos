@@ -3,7 +3,22 @@ import sql from "mssql";
 
 class PreguntaService {
     
-    getPregunta = async (idEjercicio) =>{
+    getPregunta = async () =>{
+        let returnEntity = null;
+        try {
+            let pool = await sql.connect(config);
+            let result =await pool.request()
+                                .query('SELECT * FROM Preguntas')
+            returnEntity = result.recordsets[0];
+        }
+        catch (error){
+            console.log(error)
+        }
+
+        return returnEntity;
+    }
+    
+    getPreguntaByIdEjercicio = async (idEjercicio) =>{
         let returnEntity = null;
         try {
             let pool = await sql.connect(config);

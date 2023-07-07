@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import respuestasRouter from './routes/respuestas.js'
+import preguntasRouter from './routes/preguntas.js'
 import preguntas from './src/models/preguntas.js';
 import UsuarioService from './src/services/usuarioser.js';                       
 import SimuladorService from './src/services/simuladorser.js';
@@ -31,6 +33,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/respuestas', respuestasRouter)
+app.use('/preguntas', preguntasRouter)
+
 app.get('/ejercicios', async (req, res) => {
   let data = await ejser.getEjercicios();
   res.json(data);
@@ -50,27 +55,6 @@ app.get('/usuarios/:idUsuario', async (req, res) => {
   }
   res.json(data);
 });
-
-app.get('/preguntas/:idEjercicios', async (req, res) => {
-  let objectId = req.params.idEjercicios;
-  let data = await pregser.getPregunta(objectId);
-  console.log(data)
-  if (!data) {
-    res.status(404).json({ error: 'Objeto no encontrado' });
-  }
-  res.json(data);
-});
-
-app.get('/respuestas/:idpreguntas', async (req, res) => {
-  let objectId = req.params.idpreguntas;
-  let data = await resser.getRespuestas(objectId);
-  console.log(data)
-  if (!data) {
-    res.status(404).json({ error: 'Objeto no encontrado' });
-  }
-  res.json(data);
-});
-
 
 app.listen(port, () => {
   console.log(`Servidor en funcionamiento en el puerto ${port}`);
