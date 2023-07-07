@@ -3,7 +3,6 @@ import './ListadoEjercicios.css'
 import NavBar from '../components/NavBar'
 import Ejercicio from '../components/Ejercicio'
 import { useEffect, useRef, useState } from 'react'
-import axios from 'axios'
 
 const ListadoEjercicios = () => {
 
