@@ -5,13 +5,19 @@ import NavBar from '../components/NavBar'
 import simuladoresData from '../data/simuladores'
 import Simulador from '../components/Simulador'
 const Simuladores = () => {
-    const listaSimuladores = simuladoresData
+    const [listaSimuladores, setListaSimuladores] = useState([])
 
     const [simuladores, setSimuladores] = useState([])
     const [busqueda, setBusqueda] = useState('')
     const buscarInput = useRef()
 
-    useEffect(() => setSimuladores(listaSimuladores), [])
+    useEffect(() => async() => {
+        const response = await fetch('http://localhost:5000/simuladores')
+        const data = await response.json()
+        console.log(data)
+        setListaSimuladores(data)
+        setSimuladores(data)
+    }, [])
 
     useEffect(() => {
         var lista = [...listaSimuladores]
@@ -38,9 +44,6 @@ const Simuladores = () => {
                             <Button variant="secondary"><i className="bi bi-search"></i></Button>
                         </InputGroup>
             <Container sm={9} className='cards-ejercicios-container'>
-                {simuladores.map((sim, key) => (
-                    <Simulador key={key} titulo={sim.titulo} descripcion={sim.descripcion} dificultad={sim.tema} />
-                ))}
                 {simuladores.map((sim, key) => (
                     <Simulador key={key} titulo={sim.titulo} descripcion={sim.descripcion} dificultad={sim.tema} />
                 ))}
