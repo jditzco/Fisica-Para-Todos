@@ -1,13 +1,12 @@
 import { Button, Container } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import * as formik from 'formik';
 import * as yup from 'yup';
 
-function Login() {
+function Registro() {
     const { Formik } = formik;
 
     const schema = yup.object().shape({
@@ -42,7 +41,6 @@ function Login() {
                                         >
                                             <Form.Label>Usuario</Form.Label>
                                             <Form.Control
-                                                className='imput-login'
                                                 type="text"
                                                 name="username"
                                                 value={values.username}
@@ -59,7 +57,6 @@ function Login() {
                                         >
                                             <Form.Label>Contraseña</Form.Label>
                                             <Form.Control
-                                                className='imput-login'
                                                 type="text"
                                                 name="password"
                                                 value={values.password}
@@ -77,13 +74,10 @@ function Login() {
 
                         </Card.Text>
                     </Card.Body>
-                    <Card.Footer>
-                        <text className='mute'>¿No Tienes una Cuenta?</text> <Button><Link to={'/registro'} className='link'>Registrarse</Link></Button>
-                    </Card.Footer>
                 </Card>
             </Container>
         </>
     );
 }
 
-export default Login
+export default Registro
