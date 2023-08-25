@@ -13,14 +13,8 @@ function Login() {
     const { Formik } = formik;
 
     const schema = yup.object().shape({
-      firstName: yup.string().required(),
-      lastName: yup.string().required(),
       username: yup.string().required(),
-      city: yup.string().required(),
-      state: yup.string().required(),
-      zip: yup.string().required(),
-      file: yup.mixed().required(),
-      terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
+      password: yup.string().required(),
     });
 
     return (
@@ -35,14 +29,8 @@ function Login() {
       validationSchema={schema}
       onSubmit={console.log}
       initialValues={{
-        firstName: 'Mark',
-        lastName: 'Otto',
         username: '',
-        city: '',
-        state: '',
-        zip: '',
-        file: null,
-        terms: false,
+        password: '',
       }}
     >
       {({ handleSubmit, handleChange, values, touched, errors }) => (
@@ -54,13 +42,13 @@ function Login() {
               controlId="validationFormik101"
               className="position-relative"
             >
-              <Form.Label>First name</Form.Label>
+              <Form.Label>Usuario</Form.Label>
               <Form.Control
                 type="text"
-                name="firstName"
-                value={values.firstName}
+                name="username"
+                value={values.username}
                 onChange={handleChange}
-                isValid={touched.firstName && !errors.firstName}
+                isValid={touched.username && !errors.username}
               />
               <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
             </Form.Group>
@@ -70,37 +58,24 @@ function Login() {
               controlId="validationFormik102"
               className="position-relative"
             >
-              <Form.Label>Last name</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control
                 type="text"
-                name="lastName"
-                value={values.lastName}
+                name="password"
+                value={values.password}
                 onChange={handleChange}
-                isValid={touched.lastName && !errors.lastName}
+                isValid={touched.password && !errors.password}
               />
 
               <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="position-relative mb-3">
-            <Form.Check
-              required
-              name="terms"
-              label="Agree to terms and conditions"
-              onChange={handleChange}
-              isInvalid={!!errors.terms}
-              feedback={errors.terms}
-              feedbackType="invalid"
-              id="validationFormik106"
-              feedbackTooltip
-            />
-          </Form.Group>
+          <br/>
           <Button type="submit">Submit form</Button>
         </Form>
       )}
     </Formik>
 
                         </Card.Text>
-                        <Button className='button-submit' variant="primary" type="submit">Login</Button>
                     </Card.Body>
                     <Card.Footer>
                         <text className="text-muted">Last updated 3 mins ago</text>
