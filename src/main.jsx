@@ -7,9 +7,10 @@ import Ejercicio from './pages/Ejercicio.jsx'
 import Seleccion from './Seleccion'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Simuladores from './pages/Simuladores.jsx'
+import Login from './pages/Login'
 
 const routes = createBrowserRouter([{
-  path: '/',
+  path: '/seleccion',
   element: <Seleccion/>
 },{
   path: '/listadoEjercicios',
@@ -20,6 +21,9 @@ const routes = createBrowserRouter([{
 },{
   path: '/simuladores',
   element: <Simuladores/>
+},{
+  path: '/',
+  element: <Login/>
 }])
 
 createRoot(document.getElementById('root')).render(
