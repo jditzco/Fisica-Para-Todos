@@ -17,7 +17,7 @@ const routes = createBrowserRouter([{
   path: '/listadoEjercicios',
   element: <ListadoEjercicios/>,
 },{
-  path: '/ejercicio',
+  path: '/ejercicio/:id',
   element: <Ejercicio />,
 },{
   path: '/simuladores',

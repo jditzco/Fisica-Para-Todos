@@ -1,5 +1,5 @@
 import { Button, Container, Form, Modal } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './Ejercicio.css'
 import NavBar from '../components/NavBar'
 import { useEffect, useState } from 'react'
@@ -16,9 +16,10 @@ const Test = () => {
     const [respuestas, setRespuestas] = useState([])
     const [porcentaje, setPorcentaje] = useState(0)
     const [show, setShow] = useState(false);
+    const {id} = useParams();
 
     useEffect(() => async() => {
-        const response = await fetch('http://localhost:5000/preguntas/1')
+        const response = await fetch('http://localhost:5000/preguntas/' + id)
         const data = await response.json()
         setPreguntas(data)
     }, [])
