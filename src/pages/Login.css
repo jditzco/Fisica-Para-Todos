@@ -1,3 +1,17 @@
 .imput-login{
+    width: fit-content;
+    margin-bottom: 35px;
+
+}
+
+.card-container{
     display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    flex-direction: row;
+    max-height: 70vh;
+    margin-top: 50px;
 }

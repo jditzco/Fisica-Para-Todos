@@ -17,7 +17,7 @@ function Registro() {
     return (
         <>
             <NavBar />
-            <Container className='button-container'>
+            <Container className='card-container'>
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src='/img/logo.png' />
                     <Card.Body>
