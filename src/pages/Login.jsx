@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import * as formik from 'formik';
 import * as yup from 'yup';
 import './Login.css'
+import LoginForm from '../components/LoginForm';
 
 function Login() {
     const { Formik } = formik;
@@ -20,6 +21,7 @@ function Login() {
         <>
             <NavBar />
             <Container className='card-container'>
+                <LoginForm/>
                 <Card  style={{ width: '18rem' }}>
                     <Card.Img variant="top" src='/img/logo.png' />
                     <Card.Body className='input-container'>
