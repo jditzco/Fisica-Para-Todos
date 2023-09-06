@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Card, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -26,11 +28,13 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="card">
-      <div className="card-body">
+    <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src='/img/logo.png' />
+        <Card.Body className='input-container'>
         {loggedIn ? (
           <div>
             <h2>Bienvenido, {username}!</h2>
+            <Button style={{marginTop:'10px', marginBottom: '10px', marginRight:'10px'}}><Link to={'/seleccion'} className='link'>Continuar</Link></Button>
             <button onClick={() => setLoggedIn(false)}>Cerrar sesión</button>
           </div>
         ) : (
@@ -54,13 +58,20 @@ const LoginForm = () => {
                 className="form-control"
               />
             </div>
+            <br/>
             <button onClick={handleLogin} className="btn btn-primary">
               Iniciar sesión
             </button>
-          </div>
-        )}
-      </div>
-    </div>
+            <br/>
+            <div style={{backgroundColor: '#B2BEB5', borderRadius: '10px', marginTop: '10px'}}>
+            <text style={{marginLeft:'10px'}} className='mute'>¿No Tienes una Cuenta?</text> 
+            <Button style={{marginTop:'10px', marginBottom: '10px', marginLeft: '10px'}}><Link to={'/registro'} className='link'>Registrarse</Link></Button>
+            </div>
+         </div>
+        )} 
+      </Card.Body>
+      
+    </Card>
   );
 };
 
