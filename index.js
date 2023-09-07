@@ -19,10 +19,11 @@ const pregser = new PreguntaService();
 const resser = new RespuestaService();
 
 app.use(cors({ origin: 'http://localhost:3000' }));
+//app.use(express.json)
 
 app.set("view engine", "ejs")
 
-app.get('/docs', (req, res) => {
+app.get('/', (req, res) => {
   res.render("docs")
 });
 
@@ -55,6 +56,21 @@ app.get('/usuarios/:idUsuario', async (req, res) => {
   }
   res.json(data);
 });
+
+app.post('/usuarios/add', async (req, res) => {
+  let nom = req.body.nombre;
+  let con = req.body.contraseña;
+  let maes = req.body.maestro;
+  let data = await usserr.addUsuario(nom, con, maes);
+  console.log(data);
+
+  if (!data) {
+    return res.status(404).json({ error: 'Objeto no encontrado' });
+  } else {
+    res.json(data);
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Servidor en funcionamiento en el puerto ${port}`);

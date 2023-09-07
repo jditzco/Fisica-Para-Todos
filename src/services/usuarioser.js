@@ -18,6 +18,23 @@ class UsuarioService {
 
         return returnEntity;
     }
+    addUsuario = async (nombre, contraseña, maestro) =>{
+        try {
+            let pool = await sql.connect(config);
+            await pool.request()
+                                .input('nombre', sql.VarChar, nombre)
+                                .input('contraseña', sql.VarChar, contraseña)
+                                .input('maestro', sql.Bit, maestro)
+                                .query('INSERT INTO Usuarios (nombre, contraseña, maestro) VALUES (@nombre, @contraseña, @maestro);')
+            pool.close();
+            
+            return 'Usuario insertado con éxito.';
+        } 
+        catch (error) {
+            console.log(error);
+            return 'Error al insertar el usuario.';
+        }
+    }
 
 }
 export default UsuarioService
