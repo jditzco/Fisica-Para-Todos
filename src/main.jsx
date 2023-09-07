@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Simuladores from './pages/Simuladores.jsx'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
+import LoginForm from './components/LoginForm'
 
 const routes = createBrowserRouter([{
   path: '/seleccion',
@@ -28,7 +29,7 @@ const routes = createBrowserRouter([{
 },{
   path: '/registro',
   element: <Registro/>
-}])
+},])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -5,6 +5,9 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { Link } from 'react-router-dom';
+import LoginForm from './LoginForm';
+
 
 function Registro() {
     const schema = yup.object().shape({
@@ -99,7 +102,8 @@ function Registro() {
                       </Form.Control.Feedback>
                     </Form.Group>
                     <br />
-                    <Button type="submit" className="mx-auto d-block">Crear cuenta</Button>
+                    <Button style={{ marginRight: '20px', width:116, fontWeight: 'normal'}}><Link to={'/'} className='link'>Volver</Link></Button>
+                    <Button type="submit" style={{width: 116}}>Crear cuenta</Button>
                   </Form>
                 )}
               </Formik>
