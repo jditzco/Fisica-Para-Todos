@@ -3,7 +3,22 @@ import sql from "mssql";
 
 class UsuarioService {
     
-    getUsuario = async (idUsuario) =>{
+    getUsuario = async () =>{
+        let returnEntity = null;
+        try {
+            let pool = await sql.connect(config);
+            let result =await pool.request()
+                                .query('SELECT * FROM Usuarios')
+            returnEntity = result;
+        }
+        catch (error){
+            console.log(error)
+        }
+
+        return returnEntity;
+    }
+
+    getUsuarioByid = async (idUsuario) =>{
         let returnEntity = null;
         try {
             let pool = await sql.connect(config);
@@ -18,6 +33,7 @@ class UsuarioService {
 
         return returnEntity;
     }
+
     addUsuario = async (nombre, contraseña, maestro) =>{
         try {
             let pool = await sql.connect(config);

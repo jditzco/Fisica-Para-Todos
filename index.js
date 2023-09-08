@@ -19,7 +19,9 @@ const pregser = new PreguntaService();
 const resser = new RespuestaService();
 
 app.use(cors({ origin: 'http://localhost:3000' }));
-//app.use(express.json)
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 
 app.set("view engine", "ejs")
 
@@ -47,9 +49,8 @@ app.get('/simuladores', async (req, res) => {
   res.json(data);
 });
 
-app.get('/usuarios/:idUsuario', async (req, res) => {
-  let objectId = req.params.idUsuario;
-  let data = await usserr.getUsuario(objectId);
+app.get('/usuarios', async (req, res) => {
+  let data = await usserr.getUsuario();
   console.log(data)
   if (!data) {
     res.status(404).json({ error: 'Objeto no encontrado' });
@@ -57,17 +58,18 @@ app.get('/usuarios/:idUsuario', async (req, res) => {
   res.json(data);
 });
 
-app.post('/usuarios/add', async (req, res) => {
+app.post('/usuarios/add', async (req, res) =>{
   let nom = req.body.nombre;
   let con = req.body.contraseña;
   let maes = req.body.maestro;
+  console.log(`Nombre: ${nom}, Contraseña: ${con}, Maestro: ${maes}`)
   let data = await usserr.addUsuario(nom, con, maes);
-  console.log(data);
+  console.log(data)
 
   if (!data) {
     return res.status(404).json({ error: 'Objeto no encontrado' });
   } else {
-    res.json(data);
+    res.status(201).send('Usuario creado')
   }
 });
 
