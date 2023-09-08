@@ -9,7 +9,7 @@ class UsuarioService {
             let pool = await sql.connect(config);
             let result =await pool.request()
                                 .query('SELECT * FROM Usuarios')
-            returnEntity = result;
+            returnEntity = result.recordsets[0];
         }
         catch (error){
             console.log(error)
