@@ -13,7 +13,7 @@ function Registro() {
     gmail: yup
       .string()
       .matches(
-        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        /^[a-zA-Z0-9._-]+@[a-z]+\.[a-zA-Z]{3}$/,
         'Ingrese un correo electrónico válido'
       )
       .required('El correo electrónico es requerido'),
@@ -23,7 +23,8 @@ function Registro() {
     password: yup
       .string()
       .required('La contraseña es requerida')
-      .matches(/^(?=.*[a-zA-Z])(?=.*[0-9]).{4,}$/, 'Debe contener al menos 1 número y 1 letra (mínimo 4 carácteres)'),
+      .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*?&.+-_#"¿¡´{}/|°']).{8,15}$/, 
+      'Debe contener al menos 1 número, 1 letra y 1 símbolo (mínimo 8 carácteres - máximo 15 carácteres)'),
 
     confirmPassword: yup
       .string()
@@ -32,13 +33,17 @@ function Registro() {
   });
     
   const [showWelcomeAlert, setShowWelcomeAlert] = useState(false);
+  const [gmail, setGmail] = useState('');
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (values) => {
     // Verificar si los datos son válidos
     schema.isValid(values).then((valid) => {
       if (valid) {
+        setGmail(values.gmail)
         setUsername(values.username)
+        setPassword(values.password)
         setShowWelcomeAlert(true);
       }
     });
