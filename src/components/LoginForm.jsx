@@ -16,11 +16,8 @@ const LoginForm = () => {
   };
 
   const handleLogin = () => {
-    // Aquí puedes agregar la lógica de verificación de nombre de usuario y contraseña.
-    // Por ejemplo, puedes comparar los valores con credenciales predefinidas o hacer una solicitud a un servidor para verificarlos.
-    // En este ejemplo, se verifica que el nombre de usuario sea "usuario" y la contraseña sea "contrasena".
 
-    if (username === 'usuario' && password === 'contrasena') {
+    if (username === 'usuario' && password === 'contrasena1') {
       setLoggedIn(true);
     } else {
       alert('Nombre de usuario o contraseña incorrectos');
