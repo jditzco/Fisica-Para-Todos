@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
+  const [listUsername, setListUsername] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => async() => {
+    const response = await fetch('http://localhost:5000/usuarios')
+    const data = await response.json()
+    setListUsername(data)
+}, [])
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -19,13 +26,18 @@ const LoginForm = () => {
     // Aquí puedes agregar la lógica de verificación de nombre de usuario y contraseña.
     // Por ejemplo, puedes comparar los valores con credenciales predefinidas o hacer una solicitud a un servidor para verificarlos.
     // En este ejemplo, se verifica que el nombre de usuario sea "usuario" y la contraseña sea "contrasena".
-
-    if (username === 'usuario' && password === 'contrasena') {
-      setLoggedIn(true);
-    } else {
-      alert('Nombre de usuario o contraseña incorrectos');
-    }
+    console.log(listUsername[3])
+    var isLoggedIn = false
+    listUsername.forEach((element) => {
+      if (username === element.nombre && password === element.contraseña) {
+        isLoggedIn = true
+        return
+      }
+    })
+    if (isLoggedIn) setLoggedIn(true)
+    else alert('Nombre de usuario o contraseña incorrectos');
   };
+  
 
   return (
     <Card style={{ width: '18rem' }}>
