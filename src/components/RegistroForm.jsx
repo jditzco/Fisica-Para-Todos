@@ -9,6 +9,21 @@ import { Link } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 
 function Registro() {
+
+  const post = async(endpoint, newData) => {
+    try {
+        const response = await fetch(`${endpoint}`, {
+            method: 'POST',
+            headers: { "Accept": 'application/json', "Content-Type": 'application/json', },
+            body: JSON.stringify(newData)
+        })
+        // return await response.json()
+    }
+    catch {
+        throw new Error(`No se pudo realizar el fetch tipo POST :(`)
+    }
+  }
+
   const schema = yup.object().shape({
     gmail: yup
       .string()
@@ -23,8 +38,8 @@ function Registro() {
     password: yup
       .string()
       .required('La contraseña es requerida')
-      .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[$@$!%*?&.+-_#"¿¡´{}/|°']).{8,15}$/, 
-      'Debe contener al menos 1 número, 1 letra y 1 símbolo (mínimo 8 carácteres - máximo 15 carácteres)'),
+      .matches(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%&*()_+{}:;<>,.?]).{4,15}$/, 
+      'Debe contener al menos 1 número, 1 letra y 1 símbolo (mínimo 4 carácteres - máximo 15 carácteres)'),
 
     confirmPassword: yup
       .string()
@@ -36,6 +51,8 @@ function Registro() {
   const [gmail, setGmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [teacher, setTeacher] = useState(false);
+
 
   const handleSubmit = (values) => {
     // Verificar si los datos son válidos
@@ -44,9 +61,13 @@ function Registro() {
         setGmail(values.gmail)
         setUsername(values.username)
         setPassword(values.password)
+        setTeacher(values.teacher)
         setShowWelcomeAlert(true);
+        let data = {gmail: values.gmail , nombre: values.username, contraseña: values.password, maestro: values.maestro} 
+        post('http://localhost:5000/usuarios/add', data)
       }
     });
+    
   };
 
   
@@ -129,6 +150,20 @@ function Registro() {
                       />
                       <Form.Control.Feedback type="invalid">
                         {errors.confirmPassword}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Form.Group as={Col} md="12" controlId="validationFormik103">
+                      <Form.Label>Eres maestro</Form.Label>
+                      <Form.Check
+                        type="checkbox"
+                        name="maestro"
+                        value={false}
+                        onChange={handleChange}
+                        
+                      />
+                      <Form.Control.Feedback type="invalid">
+                    
                       </Form.Control.Feedback>
                     </Form.Group>
 
