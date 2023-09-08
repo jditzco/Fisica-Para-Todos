@@ -57,7 +57,7 @@ const ListadoEjercicios = () => {
                 <Row>
                     <Col sm={3} className='dificultades-container'>
                         <h4>Dificultades</h4>
-                        <Button variant="primary" value={0} onClick={handleClick} className='dificulty-button'>Reset</Button>
+                        <Button variant="info" value={0} onClick={handleClick} className='dificulty-button'>Reset</Button>
                         <ButtonGroup aria-label="Basic example" className='dificulty-button'>
                             <Button variant="success" value={1} onClick={handleClick}>Principiante</Button>
                             <Button variant="warning" value={2} onClick={handleClick}>Intermedio</Button>
