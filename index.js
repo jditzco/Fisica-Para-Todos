@@ -62,7 +62,13 @@ app.post('/usuarios/add', async (req, res) =>{
   let mail = req.body.gmail
   let nom = req.body.nombre;
   let con = req.body.contraseña;
-  let maes = req.body.maestro;
+  let maes
+  if(req.body.maestro!=undefined){
+    maes = req.body.maestro;
+  }
+  else{
+    maes = false
+  }
   console.log(`Nombre: ${nom}, Contraseña: ${con}, Maestro: ${maes}`)
   let data = await usserr.addUsuario(mail, nom, con, maes);
   console.log(data)
