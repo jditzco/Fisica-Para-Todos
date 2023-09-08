@@ -143,7 +143,7 @@ function Registro() {
               {showWelcomeAlert && (
                 <Alert variant="success" onClose={() => setShowWelcomeAlert(false)} dismissible>
                   ¡Bienvenido {username}! Tu cuenta ha sido creada con éxito.
-                  <Button style={{marginLeft:'60px'}}><Link to={'/seleccion'} className='link'>Continuar</Link></Button>
+                  <Button style={{marginLeft:'60px'}}><Link to={'/'} className='link'>Continuar</Link></Button>
                 </Alert>)}
             </Card.Text>
           </Card.Body>
