@@ -34,14 +34,15 @@ class UsuarioService {
         return returnEntity;
     }
 
-    addUsuario = async (nombre, contraseña, maestro) =>{
+    addUsuario = async (gmail, nombre, contraseña, maestro) =>{
         try {
             let pool = await sql.connect(config);
             await pool.request()
+                                .input('gmail', sql.VarChar, gmail)
                                 .input('nombre', sql.VarChar, nombre)
                                 .input('contraseña', sql.VarChar, contraseña)
                                 .input('maestro', sql.Bit, maestro)
-                                .query('INSERT INTO Usuarios (nombre, contraseña, maestro) VALUES (@nombre, @contraseña, @maestro);')
+                                .query('INSERT INTO Usuarios (gmail, nombre, contraseña, maestro) VALUES (@gmail, @nombre, @contraseña, @maestro);')
             pool.close();
             
             return 'Usuario insertado con éxito.';
