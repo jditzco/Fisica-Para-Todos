@@ -6,10 +6,15 @@
     font-weight: 600;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    padding: 10px;
+}
+
+.cuenta {
+    height: 3rem;
 }
 
 .logo {
     height: 3rem;
+    justify-content: center;
+    margin-left: 46vw;
 }

@@ -1,0 +1,12 @@
+.carta{
+    width: 1100PX;
+    height: 600PX;
+}
+
+.titulo{
+    font-size: 2vw;
+}
+
+.descripcion{
+    font-size: large;
+}

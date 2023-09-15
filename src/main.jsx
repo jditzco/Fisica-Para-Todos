@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Simuladores from './pages/Simuladores.jsx'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
+import Cuenta from './pages/Cuenta'
 
 const routes = createBrowserRouter([{
   path: '/seleccion',
@@ -28,7 +29,11 @@ const routes = createBrowserRouter([{
 },{
   path: '/registro',
   element: <Registro/>
-},])
+},{
+  path: '/cuenta',
+  element: <Cuenta/>
+}
+])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
