@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { UsuarioContext } from '../context/UsuarioContext';
 
 const LoginForm = () => {
+  const {setUsuario} = React.useContext(UsuarioContext);
   const [listUsername, setListUsername] = useState([]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +32,7 @@ const LoginForm = () => {
     var isLoggedIn = false
     listUsername.forEach((element) => {
       if (username === element.nombre && password === element.contraseña) {
+        setUsuario(element)
         isLoggedIn = true
         return
       }
