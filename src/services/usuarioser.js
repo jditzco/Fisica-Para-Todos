@@ -42,7 +42,8 @@ class UsuarioService {
                                 .input('nombre', sql.VarChar, nombre)
                                 .input('contraseña', sql.VarChar, contraseña)
                                 .input('maestro', sql.Bit, maestro)
-                                .query('INSERT INTO Usuarios (gmail, nombre, contraseña, maestro) VALUES (@gmail, @nombre, @contraseña, @maestro);')
+                                .input('0', sql.Int, 0)
+                                .query('INSERT INTO Usuarios (gmail, nombre, contraseña, progreso, estrellas, maestro) VALUES (@gmail, @nombre, @contraseña, @0, @0, @maestro);')
             pool.close();
             
             return 'Usuario insertado con éxito.';
