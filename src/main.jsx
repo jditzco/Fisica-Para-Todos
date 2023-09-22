@@ -10,6 +10,8 @@ import Simuladores from './pages/Simuladores.jsx'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
 import Cuenta from './pages/Cuenta'
+import UsuarioProvider from './context/UsuarioContext'; // Asegúrate de que la ruta sea correcta
+
 
 const routes = createBrowserRouter([{
   path: '/seleccion',
@@ -37,6 +39,8 @@ const routes = createBrowserRouter([{
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={routes} />
+    <UsuarioProvider>
+      <RouterProvider router={routes} />
+    </UsuarioProvider>
   </StrictMode>,
-) 
+);

@@ -7,9 +7,10 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
+import { UsuarioContext } from '../context/UsuarioContext';
 
 function Registro() {
-
+  const {setUsuario} = React.useContext(UsuarioContext);
   const post = async(endpoint, newData) => {
     try {
         const response = await fetch(`${endpoint}`, {
@@ -58,6 +59,7 @@ function Registro() {
     // Verificar si los datos son válidos
     schema.isValid(values).then((valid) => {
       if (valid) {
+        setUsuario(values)
         setGmail(values.gmail)
         setUsername(values.username)
         setPassword(values.password)

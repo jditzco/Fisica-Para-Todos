@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { UsuarioContext } from '../context/UsuarioContext';
 
 const modalStyles = {
   overlay: {
@@ -18,14 +19,16 @@ const modalStyles = {
 };
 
 function UserModalButton() {
+  const {usuario} = React.useContext(UsuarioContext)
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(usuario.estrellas)
 
   const userData = {
-    username: 'UsuarioEjemplo',
-    stars: 4,
+    username: usuario.nombre,
+    stars: usuario.estrellas,
     profilePicture: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-    email: 'usuario@example.com', // Agregamos el correo electrónico
-    isTeacher: true, // Agregamos si es maestro o no (true o false)
+    email:usuario.gmail, // Agregamos el correo electrónico
+    isTeacher: usuario.maestro, // Agregamos si es maestro o no (true o false)
   };
 
   const openModal = () => {
