@@ -44,6 +44,12 @@ app.get('/ejercicios', async (req, res) => {
   res.json(data);
 });
 
+app.get('/ejercicios/:id', async (req, res) => {
+  let objectId = req.params.id;
+  let data = await ejser.getEjerciciosById(objectId);
+  res.json(data);
+});
+
 app.get('/simuladores', async (req, res) => {
   let data = await simuser.getSimuladores();
   res.json(data);
@@ -80,6 +86,21 @@ app.post('/usuarios/add', async (req, res) =>{
   }
 });
 
+app.post('/usuarios/update', async (req, res) =>{
+  let idUs = req.body.id
+  let estr = req.body.estrellas;
+  let prog = req.body.progreso;
+  console.log(idUs)
+  
+  let data = await usserr.updateUsuario(idUs, prog, estr);
+  console.log(data)
+
+  if (!data) {
+    return res.status(404).json({ error: 'Objeto no encontrado' });
+  } else {
+    res.status(201).send('Usuario modificado')
+  }
+});
 
 app.listen(port, () => {
   console.log(`Servidor en funcionamiento en el puerto ${port}`);

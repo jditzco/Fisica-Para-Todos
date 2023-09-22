@@ -53,6 +53,23 @@ class UsuarioService {
             return 'Error al insertar el usuario.';
         }
     }
+    updateUsuario = async (idUs, progreso, estrellas) =>{
+        try {
+            let pool = await sql.connect(config);
+            await pool.request()
+                                .input('progreso', sql.Int, progreso)
+                                .input('estrellas', sql.Int, estrellas)
+                                .input('idUs', sql.Int, idUs)
+                                .query('UPDATE Usuarios SET estrellas = @estrellas, progreso = @progreso WHERE id = @idUs;')
+            pool.close();
+            
+            return 'Usuario insertado con éxito.';
+        } 
+        catch (error) {
+            console.log(error);
+            return 'Error al modificar el usuario.';
+        }
+    }
 
 }
 export default UsuarioService
