@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { Link } from 'react-router-dom';
+import ProgressBar from './ProgressBar';
 
 const modalStyles = {
   overlay: {
@@ -71,6 +72,7 @@ function UserModalButton() {
           />
           <h2>{userData.username}</h2>
           <p>Cantidad de Estrellas: {renderStars()}</p>
+          <p><ProgressBar/></p>
           <p>Email: {userData.email}</p>
           <p>Maestro: {userData.isTeacher ? 'Sí' : 'No'}</p>
           <Link to="/editar">
