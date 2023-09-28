@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import respuestasRouter from './routes/respuestas.js'
 import preguntasRouter from './routes/preguntas.js'
+import usuarioRouter from './routes/usuarios.js';
 import preguntas from './src/models/preguntas.js';
 import UsuarioService from './src/services/usuarioser.js';                       
 import SimuladorService from './src/services/simuladorser.js';
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
 
 app.use('/respuestas', respuestasRouter)
 app.use('/preguntas', preguntasRouter)
+app.use('/usuarios', usuarioRouter)
 
 app.get('/ejercicios', async (req, res) => {
   let data = await ejser.getEjercicios();
@@ -53,53 +55,6 @@ app.get('/ejercicios/:id', async (req, res) => {
 app.get('/simuladores', async (req, res) => {
   let data = await simuser.getSimuladores();
   res.json(data);
-});
-
-app.get('/usuarios', async (req, res) => {
-  let data = await usserr.getUsuario();
-  console.log(data)
-  if (!data) {
-    res.status(404).json({ error: 'Objeto no encontrado' });
-  }
-  res.json(data);
-});
-
-app.post('/usuarios/add', async (req, res) =>{
-  let mail = req.body.gmail
-  let nom = req.body.nombre;
-  let con = req.body.contraseña;
-  let maes
-  if(req.body.maestro!=undefined){
-    maes = req.body.maestro;
-  }
-  else{
-    maes = false
-  }
-  console.log(`Nombre: ${nom}, Contraseña: ${con}, Maestro: ${maes}`)
-  let data = await usserr.addUsuario(mail, nom, con, maes);
-  console.log(data)
-
-  if (!data) {
-    return res.status(404).json({ error: 'Objeto no encontrado' });
-  } else {
-    res.status(201).send('Usuario creado')
-  }
-});
-
-app.post('/usuarios/update', async (req, res) =>{
-  let idUs = req.body.id
-  let estr = req.body.estrellas;
-  let prog = req.body.progreso;
-  console.log(idUs)
-  
-  let data = await usserr.updateUsuario(idUs, prog, estr);
-  console.log(data)
-
-  if (!data) {
-    return res.status(404).json({ error: 'Objeto no encontrado' });
-  } else {
-    res.status(201).send('Usuario modificado')
-  }
 });
 
 app.listen(port, () => {
