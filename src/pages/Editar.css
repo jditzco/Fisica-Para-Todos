@@ -1,0 +1,15 @@
+.carta{
+    width: 600PX;
+    height: 750PX;
+    background-color:rgb(49, 241, 241)
+}   
+
+.titulo{
+    font-size: 2vw;
+    margin-left: 150px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.descripcion{
+    font-size: 1lh;
+}

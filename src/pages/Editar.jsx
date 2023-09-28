@@ -1,18 +1,18 @@
 import { Container } from 'react-bootstrap'
 import NavBar from '../components/NavBar';
-import './Cuenta.css'
-import Avatar from '../components/Avatar';
+import EditarForm from '../components/EditarForm';
+import './Editar.css';
 
-function Cuenta() {
+function Editar() {
 
     return (
         <>
             <NavBar />
             <Container className='card-container'>
-                <Avatar/>
+                <EditarForm/>
             </Container>
         </>
     );
 }
 
-export default Cuenta
+export default Editar

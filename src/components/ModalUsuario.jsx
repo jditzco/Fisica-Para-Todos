@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { UsuarioContext } from '../context/UsuarioContext';
+import { Link } from 'react-router-dom';
 
 const modalStyles = {
   overlay: {
@@ -24,7 +25,7 @@ function UserModalButton() {
   console.log(usuario.estrellas)
 
   const userData = {
-    username: usuario.nombre,
+    username: "usuario.nombre",
     stars: usuario.estrellas,
     profilePicture: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
     email:usuario.gmail, // Agregamos el correo electrónico
@@ -72,7 +73,9 @@ function UserModalButton() {
           <p>Cantidad de Estrellas: {renderStars()}</p>
           <p>Email: {userData.email}</p>
           <p>Maestro: {userData.isTeacher ? 'Sí' : 'No'}</p>
-          <button onClick={closeModal}>Cerrar</button>
+          <Link to="/editar">
+            <button>Editar perfil</button>
+          </Link>
         </div>
       </Modal>
     </div>

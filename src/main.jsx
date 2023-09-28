@@ -9,7 +9,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Simuladores from './pages/Simuladores.jsx'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
-import Cuenta from './pages/Cuenta'
+import Editar from './pages/Editar'
 import UsuarioProvider from './context/UsuarioContext'; // Asegúrate de que la ruta sea correcta
 
 
@@ -32,8 +32,8 @@ const routes = createBrowserRouter([{
   path: '/registro',
   element: <Registro/>
 },{
-  path: '/cuenta',
-  element: <Cuenta/>
+  path: '/editar',
+  element: <Editar/>
 }
 ])
 
