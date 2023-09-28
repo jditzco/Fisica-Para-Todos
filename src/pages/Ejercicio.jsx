@@ -26,7 +26,6 @@ const Test = () => {
     const [puntaje, setPuntaje] = useState(usuario.progreso);
     const [preguntas, setPreguntas] = useState([]);
     const [respuestas, setRespuestas] = useState([]);
-    const [porcentaje, setPorcentaje] = useState(0); 
     const [show, setShow] = useState(false);
     const [text, setText] = useState('')
     const [modalCerrado, setModalCerrado] = useState(false);
@@ -60,7 +59,7 @@ const Test = () => {
         
         switch (ej[0].dificultad){
             case 1:
-                prog+=1
+                prog+=13
             break;
             case 2:
                 prog+=3
@@ -81,7 +80,7 @@ const Test = () => {
         setUsuario(uUsuario)
         let data = {id: usuario.id, gmail: usuario.gmail, nombre: usuario.nombre, contraseña: usuario.contraseña, progreso: prog, estrellas: estr, maestro: usuario.maestro}
         console.log(data)
-        post('http://localhost:5000/usuarios/update', data)
+        post('http://localhost:5000/usuarios/updateProgreso', data)
     }
 
     const calcularPorcentaje = (array) => {
@@ -100,9 +99,7 @@ const Test = () => {
             setModalCerrado(false);
         }
         setShow(true);
-        let nuevoPorcentaje = Math.round((cantidadCorrectas / array.length) * 100);
         cantidadCorrectas=0;
-        return nuevoPorcentaje;
     };
 
     const handleChange = (e) => {
@@ -125,9 +122,8 @@ const Test = () => {
             return { ...respuesta, correcta: correctas[index] };
         });
         console.log(nuevasRespuestas)
-        const nuevoPorcentaje = calcularPorcentaje(nuevasRespuestas);
+        calcularPorcentaje(nuevasRespuestas);
         setRespuestas(nuevasRespuestas);
-        setPorcentaje(nuevoPorcentaje); 
     };
 
     return (

@@ -26,14 +26,16 @@ function UserModalButton() {
   console.log(usuario.estrellas)
 
   const userData = {
-    username: "usuario.nombre",
+    username: usuario.nombre,
     stars: usuario.estrellas,
+    progress: usuario.progreso,
     profilePicture: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
     email:usuario.gmail, // Agregamos el correo electrónico
     isTeacher: usuario.maestro, // Agregamos si es maestro o no (true o false)
   };
 
   const openModal = () => {
+    console.log(userData.progress)
     setIsModalOpen(true);
   };
 
@@ -72,7 +74,7 @@ function UserModalButton() {
           />
           <h2>{userData.username}</h2>
           <p>Cantidad de Estrellas: {renderStars()}</p>
-          <p><ProgressBar/></p>
+          <p><ProgressBar progress={userData.progress}/></p>
           <p>Email: {userData.email}</p>
           <p>Maestro: {userData.isTeacher ? 'Sí' : 'No'}</p>
           <Link to="/editar">
