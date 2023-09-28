@@ -5,6 +5,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { UsuarioContext } from '../context/UsuarioContext';
 import { Link } from 'react-router-dom';
 import ProgressBar from './ProgressBar';
+import { Button } from 'react-bootstrap';
 
 const modalStyles = {
   overlay: {
@@ -76,7 +77,7 @@ function UserModalButton() {
           <p>Email: {userData.email}</p>
           <p>Maestro: {userData.isTeacher ? 'Sí' : 'No'}</p>
           <Link to="/editar">
-            <button>Editar perfil</button>
+            <Button variant='secondary'> Editar perfil</Button>
           </Link>
         </div>
       </Modal>
