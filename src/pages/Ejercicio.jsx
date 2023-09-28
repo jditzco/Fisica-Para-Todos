@@ -28,6 +28,8 @@ const Test = () => {
     const [respuestas, setRespuestas] = useState([]);
     const [porcentaje, setPorcentaje] = useState(0); 
     const [show, setShow] = useState(false);
+    const [text, setText] = useState('')
+    const [modalCerrado, setModalCerrado] = useState(false);
     const { id } = useParams();
 
     useEffect(() => {
@@ -91,8 +93,13 @@ const Test = () => {
         });
         if(cantidadCorrectas===array.length){
             sumarProgreso()
-            setShow(true);
+            setText(`Felicidades, completaste el ejercicio`)
+            setModalCerrado(true);
+        } else {
+            setText('Debes responder todo correctamente para continuar')
+            setModalCerrado(false);
         }
+        setShow(true);
         let nuevoPorcentaje = Math.round((cantidadCorrectas / array.length) * 100);
         cantidadCorrectas=0;
         return nuevoPorcentaje;
@@ -140,14 +147,15 @@ const Test = () => {
                                 <div className='respuestas-container'>
                                     {ej.respuestas.map((respuesta, index) => (
                                         <label className='checks' key={index}>
-                                            <Form.Check
+                                            <Form.Check.Input
                                                 className='checks prevent-select'
-                                                label={respuesta.respuesta}
-                                                value={respuesta.id}
+                                                type='radio'
                                                 name={`pregunta-${ej.id}`}
-                                                type={ej.tipo}
-                                                onClick={handleChange}
+                                                value={respuesta.id}
+                                                checked={respuesta.id === respuestas.find(r => r.idPregunta === ej.id)?.respuesta}
+                                                onChange={handleChange}
                                             />
+                                            <Form.Check.Label>{respuesta.respuesta}</Form.Check.Label>
                                         </label>
                                     ))}
                                 </div>
@@ -161,12 +169,27 @@ const Test = () => {
 
                 <Modal show={show}>
                     <Modal.Header>
-                        <Modal.Title>Resultado</Modal.Title>
+                        <Modal.Title>
+                            Resultado
+                        </Modal.Title>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            aria-label="Cerrar"
+                            onClick={() => setShow(false)}
+                        ></button>
                     </Modal.Header>
-                    <Modal.Body> <h2>Te sacaste un {porcentaje}/100</h2>
-                        <Button variant="primary"><Link to={'/listadoEjercicios'} className='link'>Finalizar ejercicio</Link></Button>
+                    <Modal.Body>
+                        <h2>{text}</h2>
+                        {modalCerrado && (
+                            <Button variant="primary">
+                                <Link to={'/listadoEjercicios'} className='link'>Finalizar ejercicio</Link>
+                            </Button>
+                        )}
                     </Modal.Body>
                 </Modal>
+
+
             </Container>
         </>
     );
