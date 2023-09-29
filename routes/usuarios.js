@@ -42,7 +42,7 @@ router.post('/updateProgreso', async (req, res) =>{
   let prog = req.body.progreso;
   console.log(idUs)
   
-  let data = await usserr.updateUsuario(idUs, prog, estr);
+  let data = await usserr.updateUsuarioProgreso(idUs, prog, estr);
   console.log(data)
 
   if (!data) {
@@ -51,4 +51,20 @@ router.post('/updateProgreso', async (req, res) =>{
     res.status(201).send('Usuario modificado')
   }
 });
+
+router.post('/updatePerfil', async (req, res) =>{
+  let idUs = req.body.id
+  let nom = req.body.nombre
+  let foto = req.body.foto;
+  
+  let data = await usserr.updateUsuarioPerfil(idUs, nom, foto);
+  console.log(data)
+
+  if (!data) {
+    return res.status(404).json({ error: 'Objeto no encontrado' });
+  } else {
+    res.status(201).send('Usuario modificado')
+  }
+});
+
 export default router;
