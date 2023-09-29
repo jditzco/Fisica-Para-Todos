@@ -4,11 +4,24 @@ import { UsuarioContext } from '../context/UsuarioContext';
 import { Link } from 'react-router-dom';
 
 function EditarForm() {
-  const { usuario } = React.useContext(UsuarioContext);
+  const { usuario,  setUsuario} = React.useContext(UsuarioContext);
+  const post = async(endpoint, newData) => {
+    try {
+        const response = await fetch(`${endpoint}`, {
+            method: 'POST',
+            headers: { "Accept": 'application/json', "Content-Type": 'application/json', },
+            body: JSON.stringify(newData)
+        })
+        // return await response.json()
+    }
+    catch {
+        throw new Error(`No se pudo realizar el fetch tipo POST :(`)
+    }
+  }
 
   const [userData, setUserData] = useState({
     username: usuario.nombre,
-    profilePicture: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+    profilePicture: usuario.foto,
   });
 
   const handleInputChange = (e) => {
@@ -38,8 +51,24 @@ function EditarForm() {
 
   const guardarDatos = () => {
     // Aquí puedes realizar la lógica para guardar los datos, por ejemplo, enviar una solicitud HTTP al servidor
-    const data = { nombre: userData.username, foto: userData.profilePicture };
-    // Ejemplo de cómo imprimir los datos para verificar
+    const newU = { 
+      id: usuario.id, 
+      gmail: usuario.gmail, 
+      nombre: userData.username, 
+      contraseña: usuario.contraseña, 
+      progreso: usuario.progreso, 
+      estrellas: usuario.estrellas, 
+      maestro: usuario.maestro, 
+      foto: userData.profilePicture
+    };
+    const data = {
+      id: usuario.id,
+      nombre: userData.username,
+      foto: userData.profilePicture
+    } 
+    setUsuario(newU)
+    post('http://localhost:5000/usuarios/updatePerfil', data)
+    console.log(data.foto)
     console.log('Datos a guardar:', data);
   };
 

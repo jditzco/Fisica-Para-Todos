@@ -30,9 +30,9 @@ function UserModalButton() {
     username: usuario.nombre,
     stars: usuario.estrellas,
     progress: usuario.progreso,
-    profilePicture: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
-    email:usuario.gmail, // Agregamos el correo electrónico
-    isTeacher: usuario.maestro, // Agregamos si es maestro o no (true o false)
+    profilePicture: usuario.foto,
+    email:usuario.gmail, 
+    isTeacher: usuario.maestro, 
   };
 
   const openModal = () => {
@@ -58,7 +58,15 @@ function UserModalButton() {
       <img
         src={userData.profilePicture}
         alt={userData.username}
-        style={{ maxWidth: '8%', borderRadius: '50%', cursor: 'pointer' }}
+        style={{
+          width: '3rem', 
+          objectFit: 'cover', 
+          borderRadius: '50%',
+          cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'center', 
+          alignItems: 'center', 
+        }}
         onClick={openModal}
       />
       <Modal

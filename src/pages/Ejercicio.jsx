@@ -59,7 +59,7 @@ const Test = () => {
         
         switch (ej[0].dificultad){
             case 1:
-                prog+=13
+                prog+=1
             break;
             case 2:
                 prog+=3
@@ -76,9 +76,9 @@ const Test = () => {
         console.log(prog)
         setEstrellas(estr)
         setPuntaje(prog)
-        let uUsuario = {id: usuario.id, estrellas: estr, progreso: prog}
+        let uUsuario = {id: usuario.id, gmail: usuario.gmail, nombre: usuario.nombre, contraseña: usuario.contraseña, progreso: prog, estrellas: estr, maestro: usuario.maestro, foto: usuario.foto}
         setUsuario(uUsuario)
-        let data = {id: usuario.id, gmail: usuario.gmail, nombre: usuario.nombre, contraseña: usuario.contraseña, progreso: prog, estrellas: estr, maestro: usuario.maestro}
+        let data = {id: usuario.id, gmail: usuario.gmail, nombre: usuario.nombre, contraseña: usuario.contraseña, progreso: prog, estrellas: estr, maestro: usuario.maestro, foto: usuario.foto}
         console.log(data)
         post('http://localhost:5000/usuarios/updateProgreso', data)
     }
