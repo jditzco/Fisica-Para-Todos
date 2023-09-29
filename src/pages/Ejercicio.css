@@ -22,12 +22,12 @@
     padding-left: 30px;
     transform: scale(1.05);
 }
-label > .form-check{
-    transition: all .15s ease;
+label > .form-check-input{
+    transition: all .20s ease;
 }
-label > .form-check:hover{
+label > .form-check-input:hover{
     transform: scale(1.023);
     border-radius: 5px;
-    background-color: rgba(84, 148, 221, .5);
+    background-color: rgba(175, 202, 228, 0.5);
     padding-left: 50px;
 }
