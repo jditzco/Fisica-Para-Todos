@@ -10,6 +10,7 @@ import Simuladores from './pages/Simuladores.jsx'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
 import Editar from './pages/Editar'
+import CrearEj from './pages/CrearEj'
 import UsuarioProvider from './context/UsuarioContext'; // Asegúrate de que la ruta sea correcta
 
 
@@ -34,6 +35,9 @@ const routes = createBrowserRouter([{
 },{
   path: '/editar',
   element: <Editar/>
+},{
+  path: '/crearEj',
+  element: <CrearEj/>
 }
 ])
 

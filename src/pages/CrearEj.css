@@ -1,0 +1,30 @@
+.card{
+    width: 700px;
+}
+
+.mas {
+    height: auto;
+    width: auto;
+    background-color: rgb(27, 177, 177);
+    font-size: x-small;
+    color: white;
+    font-weight:900;
+    border: 1px solid #1d95b3;
+}
+
+.incorrect {
+    background-color: red;
+}
+
+.custom-green-bg {
+    background-color: #c1e7c1; /* Puedes ajustar este valor a tu preferencia */
+  }
+
+  .custom-red-bg {
+    background-color: #f7bcb2; /* Puedes ajustar este valor a tu preferencia */
+  }
+  
+  .center {
+        margin-left:16ic;
+        background-color: #3bc0fd;
+  }

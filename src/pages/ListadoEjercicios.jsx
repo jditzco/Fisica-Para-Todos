@@ -2,7 +2,9 @@ import { Container, Row, Col, Form, InputGroup, Button, ButtonGroup } from 'reac
 import './ListadoEjercicios.css'
 import NavBar from '../components/NavBar'
 import Ejercicio from '../components/Ejercicio'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, } from 'react'
+import { Link } from 'react-router-dom'
+
 
 const ListadoEjercicios = () => {
 
@@ -43,9 +45,13 @@ const ListadoEjercicios = () => {
             <NavBar />
             <Container fluid className='app-container'>
                 <Row>
-                    <Col sm={3}></Col>
+                    <Col sm={2}></Col>
                     <Col sm={9}>
+                    
                         <InputGroup className="mb-3">
+                        <Link to='/crearEj'>
+                            <Button>Crear ejercicio</Button>
+                        </Link>
                             <Form.Control placeholder="Buscar..."
                                 value={busqueda}
                                 onChange={handleChange}
