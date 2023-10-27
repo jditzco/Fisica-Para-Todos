@@ -34,5 +34,22 @@ class PreguntaService {
         return returnEntity;
     }
 
+    addPregunta = async (pregunta, idEjercicio) =>{
+        try {
+            let pool = await sql.connect(config);
+            await pool.request()
+                                .input('pregunta', sql.Text, pregunta)
+                                .input('idEjercicio', sql.Int, idEjercicio)
+                                .query('INSERT INTO Preguntas (pregunta, idEjercicio) VALUES (@pregunta, @idEjercicio);')
+            pool.close();
+            
+            return 'Pregunta insertado con éxito.';
+        } 
+        catch (error) {
+            console.log(error);
+            return 'Error al insertar la pregunta.';
+        }
+    }
+
 }
 export default PreguntaService

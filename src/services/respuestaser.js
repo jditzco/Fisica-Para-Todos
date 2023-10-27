@@ -32,5 +32,23 @@ class RespuestaService {
         return returnEntity;
     }
 
+    addRespuesta = async (idPregunta, respuesta, correcta) =>{
+        try {
+            let pool = await sql.connect(config);
+            await pool.request()
+                                .input('idPregunta', sql.Int, idPregunta)
+                                .input('respuesta', sql.Text, respuesta)
+                                .input('correcta', sql.Bit, correcta)
+                                .query('INSERT INTO Respuestas (idPregunta, respuesta, correcta) VALUES (@idPregunta, @respuesta, @correcta);')
+            pool.close();
+            
+            return 'Respuesta insertado con éxito.';
+        } 
+        catch (error) {
+            console.log(error);
+            return 'Error al insertar la respuesta.';
+        }
+    }
+
 }
 export default RespuestaService

@@ -30,5 +30,23 @@ class EjercicioService {
 
         return returnEntity;
     }
+
+    addEjercicio = async (titulo, descripcion, dificultad) =>{
+        try {
+            let pool = await sql.connect(config);
+            await pool.request()
+                                .input('titulo', sql.Text, titulo)
+                                .input('descripcion', sql.Text, descripcion)
+                                .input('dificultad', sql.Int, dificultad)
+                                .query('INSERT INTO Ejercicios (titulo, descripcion, dificultad) VALUES (@titulo, @descripcion, @dificultad);')
+            pool.close();
+            
+            return 'Ejercicio insertado con éxito.';
+        } 
+        catch (error) {
+            console.log(error);
+            return 'Error al insertar el ejercicio.';
+        }
+    }
 }
 export default EjercicioService
