@@ -1,30 +1,39 @@
+// AddPregunta.jsx
+
 import React, { useState } from 'react';
 
-const AddPregunta = () => {
-  const [pregunta, setPregunta] = useState('');
-  const [respuestas, setRespuestas] = useState([{ text: '', isCorrect: false }]); // Usar un array para manejar respuestas
+const AddPregunta = ({ preg, setPreguntas, resp, setRespuestas }) => {
+  const [pregunta, setPregunta] = useState({ text: '', id: preg ? preg.id : null });
+  const [respuestas, setRespuestasLocal] = useState(resp || [{ text: '', isCorrect: false, idPreg: pregunta.id }]);
 
   const handleAddRespuesta = () => {
     const cantRespuestas = respuestas.length;
-    if(cantRespuestas<4)
-    {
-        setRespuestas([...respuestas, { text: '', isCorrect: false }]); // Agregar una respuesta vacía al array
+    if (cantRespuestas < 4) {
+      setRespuestasLocal([...respuestas, { text: '', isCorrect: false, idPreg: pregunta.id }]);
     }
   };
 
+  const handleChange = (e) => {
+    setPregunta({ text: e.target.value, id: pregunta.id });
+    console.log(pregunta);
+  }
+
   const handleToggleCorrect = (index) => {
     const updatedRespuestas = [...respuestas];
-    updatedRespuestas[index].isCorrect = !updatedRespuestas[index].isCorrect; // Invertir el valor de isCorrect
-    setRespuestas(updatedRespuestas);
+    updatedRespuestas[index].isCorrect = !updatedRespuestas[index].isCorrect;
+    setRespuestasLocal(updatedRespuestas);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Validar los datos del formulario si es necesario antes de enviarlos al padre
-    onFormSubmit({ pregunta, respuestas });
-    // Limpiar los campos después de enviar el formulario
-    setPregunta('');
-    setRespuestas([{ text: '', isCorrect: false }]);
+
+    const preguntaData = {
+      pregunta,
+      respuestas,
+    };
+    console.log('Datos de la pregunta:', preguntaData); // Mostrar datos en la consola
+    setPreguntas(pregunta);
+    setRespuestas([{ text: '', isCorrect: false, idPreg: pregunta.id }]);
   };
 
   return (
@@ -34,8 +43,8 @@ const AddPregunta = () => {
         <input
           type="text"
           className="form-control"
-          value={pregunta}
-          onChange={(e) => setPregunta(e.target.value)}
+          value={pregunta.text}
+          onChange={handleChange}
           required
         />
       </div>
@@ -51,7 +60,7 @@ const AddPregunta = () => {
               onChange={(e) => {
                 const updatedRespuestas = [...respuestas];
                 updatedRespuestas[index].text = e.target.value;
-                setRespuestas(updatedRespuestas);
+                setRespuestasLocal(updatedRespuestas);
               }}
               required
             />
@@ -64,13 +73,16 @@ const AddPregunta = () => {
             </button>
           </div>
         ))}
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleAddRespuesta}
-        >
-          Agregar Respuesta
-        </button>
+
+        {respuestas.length < 4 ? (
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleAddRespuesta}
+          >
+            Agregar Respuesta
+          </button>
+        ) : null}
       </div>
     </form>
   );

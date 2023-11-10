@@ -9,7 +9,7 @@ function CrearEj() {
         <>
             <NavBar />
             <Container className='card-container'>
-                <CrearEjForm/>
+                <CrearEjForm />
             </Container>
         </>
     );

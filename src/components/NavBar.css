@@ -1,20 +1,26 @@
-.navbar-container{
+.navbar-container {
     position: sticky;
     background-color: #4ae1eb !important;
     width: 100vw;
     font-size: 20px;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
+    justify-content: space-between; /* Distribuir los elementos a lo largo del eje principal */
     padding: 10px;
-}
-
-.cuenta {
+  }
+  
+  .cuenta {
     height: 3rem;
-}
-
-.logo {
+  }
+  
+  .logo {
     height: 3rem;
-    justify-content: center;
-    margin-left:850px;
-}
+  }
+  
+  /* Agregamos una nueva clase para el contenedor de los botones para darle margen a la derecha */
+  .navbar-buttons {
+    display: flex;
+    align-items: center;
+  }
+  

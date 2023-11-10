@@ -1,0 +1,26 @@
+.ranking-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .ranking-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+  }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  
+  .star-count {
+    color: #ffc107; /* Color amarillo, puedes ajustarlo según tu paleta de colores */
+  }
+  
+  .title {
+    justify-content: center;
+  }

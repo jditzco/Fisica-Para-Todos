@@ -1,29 +1,43 @@
+// CrearEjForm.jsx
+
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import AddPregunta from './AddPregunta';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CrearEjForm = ({ onFormSubmit }) => {
   const [titulo, setTitulo] = useState('');
   const [descrip, setDescrip] = useState('');
   const [cantidadPreguntas, setCantidadPreguntas] = useState(1);
+  const [preguntas, setPreguntas] = useState([]);
+  const [respuestas, setRespuestas] = useState([]);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    // Validar los datos del formulario si es necesario antes de enviarlos al padre
-    onFormSubmit({ titulo, descrip });
-    // Limpiar los campos después de enviar el formulario
-    setTitulo('');
-    setDescrip('');
+    if (titulo !== "" && descrip !== "") {
+      event.preventDefault();
+      const ejercicioData = {
+        titulo,
+        descrip,
+        preguntas,
+        respuestas,
+      };
+      console.log('Datos del formulario:', ejercicioData); // Mostrar datos en la consola
+      //onFormSubmit(ejercicioData);
+      setTitulo('');
+      setDescrip('');
+      navigate("/listadoEjercicios");
+    } else {
+      alert("Completar todos los datos");
+    }
   };
 
   const handlePress = () => {
-    if(cantidadPreguntas<5)
-    {
-        setCantidadPreguntas(cantidadPreguntas + 1);
+    if (cantidadPreguntas < 5) {
+      setCantidadPreguntas(cantidadPreguntas + 1);
     }
   }
 
-  // Crear un array de componentes "AddPregunta" según la cantidad de preguntas
   const preguntasArray = Array.from({ length: cantidadPreguntas }, (v, i) => i);
 
   return (
@@ -50,13 +64,32 @@ const CrearEjForm = ({ onFormSubmit }) => {
               required
             />
           </div>
-          
-        {preguntasArray.map((index) => (
-          <AddPregunta key={index} />  // Renderizar "AddPregunta" según la cantidad de preguntas
-        ))}
-        <button onClick={handlePress} className='mas'>+</button>
-        <br /><br />
+
+          {preguntasArray.map((index) => (
+            <AddPregunta
+              key={index}
+              preg={preguntas}
+              setPreguntas={(pregunta) => {
+                const updatedPreguntas = [...preguntas];
+                updatedPreguntas[index] = pregunta;
+                setPreguntas(updatedPreguntas);
+              }}
+              resp={respuestas[index]}
+              setResp={(respuesta) => {
+                const updatedRespuestas = [...respuestas];
+                updatedRespuestas[index] = respuesta;
+                setRespuestas(updatedRespuestas);
+              }}
+            />
+          ))}
+          {cantidadPreguntas < 5 ?
+            (
+              <button onClick={handlePress} className='mas'>+</button>
+            ) : null}
+
+          <br /><br />
           <button type="submit" className="center">Crear Ejercicio</button>
+
         </form>
       </Card.Body>
     </Card>
