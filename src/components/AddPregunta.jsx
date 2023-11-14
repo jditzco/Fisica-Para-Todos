@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 
-const AddPregunta = ({ preg, setPreguntas, resp, setRespuestas }) => {
-  const [pregunta, setPregunta] = useState({ text: '', id: preg ? preg.id : null });
+const AddPregunta = ({ idPreg, preguntas, setPreguntas, resp, setRespuestas }) => {
+  const [pregunta, setPregunta] = useState({ text: '', id: idPreg });
   const [respuestas, setRespuestasLocal] = useState(resp || [{ text: '', isCorrect: false, idPreg: pregunta.id }]);
 
   const handleAddRespuesta = () => {
@@ -15,6 +15,20 @@ const AddPregunta = ({ preg, setPreguntas, resp, setRespuestas }) => {
 
   const handleChange = (e) => {
     setPregunta({ text: e.target.value, id: pregunta.id });
+
+    const preguntaExistente = preguntas.find((pregunta) => pregunta.id === idPreg);
+
+    if (preguntaExistente) {
+      const updatedPreguntas = preguntas.map((pregunta) =>
+        pregunta.id === idPreg ? { ...pregunta, text: e.target.value } : pregunta
+      );
+
+      setPreguntas(updatedPreguntas);
+    } else {
+      setPreguntas(...preguntas, { text: e.target.value, id: idPreg });
+    }
+
+    console.log(e)
     console.log(pregunta);
   }
 

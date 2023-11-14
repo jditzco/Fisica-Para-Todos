@@ -24,7 +24,6 @@ function RankingModalButton() {
   useEffect(() => async () => {
     const response = await fetch('http://localhost:5000/usuarios')
     const data = await response.json()
-    console.log(data)
     bubbleSort(data)
   }, [])
 

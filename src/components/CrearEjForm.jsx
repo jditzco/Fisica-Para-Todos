@@ -68,13 +68,13 @@ const CrearEjForm = ({ onFormSubmit }) => {
           {preguntasArray.map((index) => (
             <AddPregunta
               key={index}
+              idPreg={index}
               preg={preguntas}
               setPreguntas={(pregunta) => {
                 const updatedPreguntas = [...preguntas];
                 updatedPreguntas[index] = pregunta;
                 setPreguntas(updatedPreguntas);
               }}
-              resp={respuestas[index]}
               setResp={(respuesta) => {
                 const updatedRespuestas = [...respuestas];
                 updatedRespuestas[index] = respuesta;
