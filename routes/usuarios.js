@@ -27,7 +27,6 @@ router.post('/add', async (req, res) =>{
   }
   console.log(`Nombre: ${nom}, Contraseña: ${con}, Maestro: ${maes}`)
   let data = await usserr.addUsuario(mail, nom, con, maes);
-  console.log(data)
 
   if (!data) {
     return res.status(404).json({ error: 'Objeto no encontrado' });

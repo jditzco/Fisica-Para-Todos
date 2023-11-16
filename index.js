@@ -4,7 +4,7 @@ import respuestasRouter from './routes/respuestas.js'
 import preguntasRouter from './routes/preguntas.js'
 import usuarioRouter from './routes/usuarios.js';
 import preguntas from './src/models/preguntas.js';
-import UsuarioService from './src/services/usuarioser.js';                       
+import UsuarioService from './src/services/usuarioser.js';
 import SimuladorService from './src/services/simuladorser.js';
 import EjercicioService from './src/services/ejercicioser.js';
 import PreguntaService from './src/services/preguntaser.js';
@@ -51,6 +51,38 @@ app.get('/ejercicios/:id', async (req, res) => {
   let data = await ejser.getEjerciciosById(objectId);
   res.json(data);
 });
+
+app.post('/ejercicios/add', async (req, res) => {
+  let ejercicio = req.body.ejercicio
+  let preguntas = req.body.preguntas;
+
+  let data
+
+  data = await ejser.addEjercicio(ejercicio.titulo, ejercicio.descripcion, ejercicio.dificultad)
+
+  if (data) {
+    let ej
+    ej = await ejser.getUltimoEjercicio()
+
+    for (const element of preguntas) {
+      data = await pregser.addPregunta(element.pregunta, ej.id)
+
+      const preg = await pregser.getUltimaPregunta()
+
+      for (const answerElement of element.respuestas) {
+        data = await resser.addRespuesta(preg.id, answerElement.respuesta, answerElement.correcta)
+      }
+    }
+  } else {
+    // Handle the case when the exercise addition fails
+    res.status(500).send('Failed to add exercise');
+    return;
+  }
+
+  res.status(201).send('Ejercicio añadido')
+});
+
+
 
 app.get('/simuladores', async (req, res) => {
   let data = await simuser.getSimuladores();

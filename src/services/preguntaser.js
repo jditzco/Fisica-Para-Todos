@@ -51,5 +51,19 @@ class PreguntaService {
         }
     }
 
+    getUltimaPregunta = async () => {
+        let returnEntity = null;
+        try {
+            let pool = await sql.connect(config);
+            let result = await pool.request()
+                .query('SELECT TOP 1 * FROM Preguntas ORDER BY id DESC');
+            returnEntity = result.recordsets[0][0]; // Selecciona la primera fila del resultado
+        } catch (error) {
+            console.log(error);
+        }
+    
+        return returnEntity;
+    }
+    
 }
 export default PreguntaService
