@@ -65,12 +65,13 @@ app.post('/ejercicios/add', async (req, res) => {
     ej = await ejser.getUltimoEjercicio()
 
     for (const element of preguntas) {
-      data = await pregser.addPregunta(element.pregunta, ej.id)
+      data = await pregser.addPregunta(element.text, ej.id)
 
       const preg = await pregser.getUltimaPregunta()
+      console.log(`Las respuestas son ${element.respuestas}`)
 
       for (const answerElement of element.respuestas) {
-        data = await resser.addRespuesta(preg.id, answerElement.respuesta, answerElement.correcta)
+        data = await resser.addRespuesta(preg.id, answerElement.text, answerElement.isCorrect)
       }
     }
   } else {
