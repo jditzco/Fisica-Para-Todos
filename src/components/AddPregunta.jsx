@@ -1,10 +1,9 @@
-// AddPregunta.jsx
 
 import React, { useState } from 'react';
 
 const AddPregunta = ({ idPreg, preguntas, setPreguntas, resp, setRespuestas }) => {
-  const [pregunta, setPregunta] = useState({ text: '', id: idPreg });
-  const [respuestas, setRespuestasLocal] = useState(resp || [{ text: '', isCorrect: false, idPreg: pregunta.id }]);
+  const [respuestas, setRespuestasLocal] = useState([{ text: '', isCorrect: false, idPreg: idPreg, id: 0 }]);
+  const [pregunta, setPregunta] = useState({ text: '', id: idPreg, respuestas: { text: '', isCorrect: false, idPreg: idPreg, id: 0 } });
 
   const handleAddRespuesta = () => {
     const cantRespuestas = respuestas.length;
@@ -14,22 +13,42 @@ const AddPregunta = ({ idPreg, preguntas, setPreguntas, resp, setRespuestas }) =
   };
 
   const handleChange = (e) => {
-    setPregunta({ text: e.target.value, id: pregunta.id });
+    setPregunta({ text: e.target.value, id: idPreg });
 
-    const preguntaExistente = preguntas.find((pregunta) => pregunta.id === idPreg);
+    if (preguntas && preguntas.length > 1) {
+      const excuirPreguntas = preguntas.filter((a) => a.id !== idPreg);
+      const updatedPreguntas = [{ text: e.target.value, id: idPreg, respuestas: respuestas }, ...excuirPreguntas]
+      console.log(updatedPreguntas)
+      setPreguntas(pregunta, ...updatedPreguntas);
 
-    if (preguntaExistente) {
-      const updatedPreguntas = preguntas.map((pregunta) =>
-        pregunta.id === idPreg ? { ...pregunta, text: e.target.value } : pregunta
-      );
 
-      setPreguntas(updatedPreguntas);
     } else {
-      setPreguntas(...preguntas, { text: e.target.value, id: idPreg });
+      setPreguntas({ text: e.target.value, id: idPreg, respuestas: respuestas })
+      console.log(preguntas)
+    }
+  }
+
+  const handleResp = (e, index) => {
+    if (respuestas && respuestas.length > 0) {
+      const updatedRespuestas = [...respuestas];
+      updatedRespuestas[index].text = e.target.value;
+      updatedRespuestas[index].id = index;
+      setRespuestasLocal(updatedRespuestas);
+      console.log(respuestas)
+      const updatePregunta = pregunta
+      updatePregunta.respuestas = updatedRespuestas
+
+    } else {
+      setRespuestasLocal([{ text: e.target.value, isCorrect: respuestas[index].isCorrect, idPreg: idPreg, id: index }]);
+      console.log(respuestas)
+      const updatePregunta = pregunta
+      updatePregunta.respuestas = [{ text: e.target.value, isCorrect: respuestas[index].isCorrect, idPreg: idPreg, id: index }]
     }
 
-    console.log(e)
-    console.log(pregunta);
+    const excuirPreguntas = preguntas.filter((a) => a.id !== idPreg);
+    const updatedPreguntas = [{ text: preguntas[idPreg].text, id: idPreg, respuestas: respuestas }, ...excuirPreguntas]
+    console.log(updatedPreguntas)
+    setPreguntas(pregunta, ...updatedPreguntas);
   }
 
   const handleToggleCorrect = (index) => {
@@ -38,20 +57,9 @@ const AddPregunta = ({ idPreg, preguntas, setPreguntas, resp, setRespuestas }) =
     setRespuestasLocal(updatedRespuestas);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const preguntaData = {
-      pregunta,
-      respuestas,
-    };
-    console.log('Datos de la pregunta:', preguntaData); // Mostrar datos en la consola
-    setPreguntas(pregunta);
-    setRespuestas([{ text: '', isCorrect: false, idPreg: pregunta.id }]);
-  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
       <div className="mb-3">
         <label className="form-label">Pregunta</label>
         <input
@@ -70,12 +78,8 @@ const AddPregunta = ({ idPreg, preguntas, setPreguntas, resp, setRespuestas }) =
             <input
               type="text"
               className={`form-control ${respuesta.isCorrect ? 'custom-green-bg' : 'custom-red-bg'}`}
-              value={respuesta.text}
-              onChange={(e) => {
-                const updatedRespuestas = [...respuestas];
-                updatedRespuestas[index].text = e.target.value;
-                setRespuestasLocal(updatedRespuestas);
-              }}
+              value={respuestas.text}
+              onChange={(e) => handleResp(e, index)}
               required
             />
             <button
@@ -98,7 +102,7 @@ const AddPregunta = ({ idPreg, preguntas, setPreguntas, resp, setRespuestas }) =
           </button>
         ) : null}
       </div>
-    </form>
+    </>
   );
 };
 

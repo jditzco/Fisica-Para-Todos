@@ -2,43 +2,44 @@ import { Container, Row, Col, Form, InputGroup, Button, ButtonGroup } from 'reac
 import './ListadoEjercicios.css'
 import NavBar from '../components/NavBar'
 import Ejercicio from '../components/Ejercicio'
-import { useEffect, useRef, useState, } from 'react'
+import React, { useEffect, useRef, useState, } from 'react'
 import { Link } from 'react-router-dom'
+import { UsuarioContext } from '../context/UsuarioContext';
 
 
 const ListadoEjercicios = () => {
+    const { usuario } = React.useContext(UsuarioContext);
+    const [listaEjercicios, setListaEjercicios] = useState([]);
+    const [ejerciciosActivos, setEjerciciosActivos] = useState([]);
+    const [dificultad, setDificultad] = useState(0);
+    const [busqueda, setBusqueda] = useState('');
+    const buscarInput = useRef();
 
-    // Lista de ejercicios
-    const [listaEjercicios, setListaEjercicios] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:5000/ejercicios');
+            const data = await response.json();
+            setListaEjercicios(data);
+            setEjerciciosActivos(data);
+        };
 
-    // Los ejercicios de la lista que se están mostrando en pantalla
-    const [ejerciciosActivos, setEjerciciosActivos] = useState([])
-    // Filtros
-    const [dificultad, setDificultad] = useState(0)
-    const [busqueda, setBusqueda] = useState('')
-
-    const buscarInput = useRef()
-
-    useEffect(() => async() => {
-        const response = await fetch('http://localhost:5000/ejercicios')
-        const data = await response.json()
-        setListaEjercicios(data)
-        setEjerciciosActivos(data)
-    }, [])
+        fetchData();
+    }, []);
 
     useEffect(() => { // Filtrar
-        var lista = [...listaEjercicios]
-        if (dificultad) lista = lista.filter(ej => ej.dificultad === dificultad)
+        let lista = [...listaEjercicios];
+        if (dificultad) lista = lista.filter(ej => ej.dificultad === dificultad);
         if (busqueda) {
             lista = lista.filter((ej) => (
                 ej.titulo.toUpperCase().includes(buscarInput.current.value.toUpperCase())
-            ))
+            ));
         }
-        setEjerciciosActivos(lista)
-    }, [busqueda, dificultad])
+        setEjerciciosActivos(lista);
+    }, [busqueda, dificultad, listaEjercicios]);
 
-    const handleClick = e => setDificultad(Number(e.target.value))
-    const handleChange = e => setBusqueda(e.target.value)
+    const handleClick = (e) => setDificultad(Number(e.target.value));
+    const handleChange = (e) => setBusqueda(e.target.value);
+
 
     return (
         <>
@@ -47,17 +48,20 @@ const ListadoEjercicios = () => {
                 <Row>
                     <Col sm={2}></Col>
                     <Col sm={9}>
-                    
-                        <InputGroup className="mb-3">
+                <InputGroup className="mb-3">
+                    {usuario.maestro && (
                         <Link to='/crearEj'>
                             <Button>Crear ejercicio</Button>
                         </Link>
-                            <Form.Control placeholder="Buscar..."
-                                value={busqueda}
-                                onChange={handleChange}
-                                ref={buscarInput} />
-                            <Button variant="secondary"><i className="bi bi-search"></i></Button>
-                        </InputGroup>
+                    )}
+                    <Form.Control
+                        placeholder="Buscar..."
+                        value={busqueda}
+                        onChange={handleChange}
+                        ref={buscarInput}
+                    />
+                    <Button variant="secondary"><i className="bi bi-search"></i></Button>
+                </InputGroup>
                     </Col>
                 </Row>
                 <Row>

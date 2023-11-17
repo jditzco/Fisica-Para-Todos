@@ -3,19 +3,32 @@ import './NavBar.css'
 import { Link } from 'react-router-dom';
 import UserModalButton from './ModalUsuario';
 import RankingModalButton from './RankingModal';
+import { UsuarioContext } from '../context/UsuarioContext';
+import React from 'react';
 
 function NavBar() {
-  return (
+  const { usuario } = React.useContext(UsuarioContext);
+
+  if(usuario.nombre != null){
+    return (
+      <Navbar bg="light" expand="sm" className='navbar-container'>
+        <UserModalButton />
+        <Link to={'/seleccion'}>
+          <img src='/img/logo.png' className='logo' alt='Logo' />
+        </Link>
+        <div className="navbar-buttons">
+          <RankingModalButton />
+        </div>
+      </Navbar>
+    );
+  }
+  else{
+    return (
     <Navbar bg="light" expand="sm" className='navbar-container'>
-      <UserModalButton />
-      <Link to={'/seleccion'}>
-        <img src='/img/logo.png' className='logo' alt='Logo' />
-      </Link>
-      <div className="navbar-buttons">
-        <RankingModalButton />
-      </div>
+      <img src='/img/logo.png' className='logo' alt='Logo' />
     </Navbar>
-  );
+    );
+  }
 }
 
 
