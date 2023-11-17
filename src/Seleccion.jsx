@@ -19,7 +19,6 @@ const Seleccion = () => {
         <Link to={'/listadoEjercicios'} ref={linkHome}></Link>
         <NavBar/>
         <Container className='button-container'>
-        <Button variant="info" className='button' onClick={(e) => handleClick(e, 'simuladores')}><i className="bi bi-mortarboard-fill"></i><p>Simuladores</p></Button>{' '}
         <Button variant="info" className='button' onClick={(e) => handleClick(e, 'home')}><i className="bi bi-mortarboard-fill"></i><p>Ejercicios</p></Button>{' '}
         </Container>
         </>

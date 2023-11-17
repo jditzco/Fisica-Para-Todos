@@ -46,13 +46,19 @@ function Registro() {
       .string()
       .oneOf([yup.ref('password'), null], 'Las contraseñas deben coincidir')
       .required('Debe confirmar la contraseña'),
-  });
+
+      edad : yup.number().required('Debe ingresar su edad.')
+      .integer('La edad debe ser un número entero')
+      .min(10, 'La edad debe ser igual o mayor a 10.')
+      .max(100, 'La edad debe ser igual o menor a 100.')
+});
     
   const [showWelcomeAlert, setShowWelcomeAlert] = useState(false);
   const [gmail, setGmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [teacher, setTeacher] = useState(false);
+  const [edad, setEdad] = useState(0)
 
 
   const handleSubmit = (values) => {
@@ -65,14 +71,16 @@ function Registro() {
         setPassword(values.password)
         setTeacher(values.teacher)
         setShowWelcomeAlert(true);
-        let data = {gmail: values.gmail , nombre: values.username, contraseña: values.password, maestro: values.maestro} 
+        setEdad(values.edad)
+        let data = {gmail: values.gmail , nombre: values.username, contraseña: values.password, maestro: values.maestro, edad: values.edad} 
+        console.log(data)
         post('http://localhost:5000/usuarios/add', data)
       }
     });
     
   };
-
   
+
   return (
     <>
       <Container className='card-container'>
@@ -87,6 +95,7 @@ function Registro() {
                   username: '',
                   password: '',
                   confirmPassword: '',
+                  edad: '',
                 }}
                 onSubmit={handleSubmit}
               >
@@ -154,6 +163,22 @@ function Registro() {
                         {errors.confirmPassword}
                       </Form.Control.Feedback>
                     </Form.Group>
+
+                    <Form.Group as={Col} md="12" controlId="validationFormik101" className="position-relative">
+                      <Form.Label>Edad</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="edad"
+                        value={values.edad}
+                        onChange={handleChange}
+                        isValid={touched.edad && !errors.edad}
+                        isInvalid={!!errors.edad}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.edad}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                    
 
                     <Form.Group as={Col} md="12" controlId="validationFormik103">
                       <Form.Label>Eres maestro</Form.Label>
