@@ -18,6 +18,7 @@ router.post('/add', async (req, res) =>{
   let mail = req.body.gmail
   let nom = req.body.nombre;
   let con = req.body.contraseña;
+  let edad = req.body.edad;
   let maes
   if(req.body.maestro!=undefined){
     maes = req.body.maestro;
@@ -26,7 +27,7 @@ router.post('/add', async (req, res) =>{
     maes = false
   }
   console.log(`Nombre: ${nom}, Contraseña: ${con}, Maestro: ${maes}`)
-  let data = await usserr.addUsuario(mail, nom, con, maes);
+  let data = await usserr.addUsuario(mail, nom, con, maes, edad);
 
   if (!data) {
     return res.status(404).json({ error: 'Objeto no encontrado' });
